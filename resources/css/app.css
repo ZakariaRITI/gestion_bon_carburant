@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#b{
+    display: flex;
+}
+
+#d0{
+    margin-left: 50%;
+}
+#d1{
+    margin-left: 50%;
+}
+#d2{
+    margin-left: 500%;
+}
