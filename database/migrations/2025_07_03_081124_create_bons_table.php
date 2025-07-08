@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->foreignId('vehicule_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
             $table->foreignId('preneur_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
-            $table->foreignId('utilisateur_id')->constrained()->onUpdate('restrict')->onDelete('restrict');
+            $table->foreignId('utilisateur_id')->constrained('users')->onUpdate('restrict')->onDelete('restrict');
             $table->timestamps();
         });
     }

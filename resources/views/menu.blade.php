@@ -9,8 +9,8 @@
 <body>
     <div class="container-fluid bg-secondary mt-3">
         <ul class="nav">
-        <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="">Acceuil</a></li>
-        <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="">Ajouter</a></li>
+        <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/acc">Acceuil</a></li>
+        <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/ab">Ajouter</a></li>
         <li class="nav-item dropdown">
             <a class="nav-link text-white fs-4 fw-bold dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"" href="">
                 Rechercher

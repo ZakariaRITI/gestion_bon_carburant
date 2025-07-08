@@ -5,6 +5,8 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/acc',[AdminController::class,'display']);
+Route::get('/ab',[AdminController::class,'ajoutbon']);
+Route::get('/save',[AdminController::class,'enregistrer']);
 
 Route::get('/', function () {
     return view('welcome');
