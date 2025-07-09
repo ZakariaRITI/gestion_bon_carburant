@@ -6,13 +6,14 @@
     <title>Acceuil</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/acceuil.css">
+    <link rel="stylesheet" href="/css/menu.css">
 </head>
 <body>
 
 <div id="d1">
     <div id="menu1">
         <ul class="nav flex-column bg-dark p-3">
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Tableau de bord</a></li>
+            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">----------</a></li>
         </ul>
         <img src="/img/logo2.jpg" alt="" height="150px" width="200px">
         <ul class="nav flex-column bg-dark p-3">
@@ -62,11 +63,11 @@
                     <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion Utilisateur</a></li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-white">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Vehicule</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Preneur</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-white">Support & Aide</a></li>
+            <li><hr class="my-2" style="border-top: 1px solid black; width: 100%;"></li>
+            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
+            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
+            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
             <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
             <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
             <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
@@ -79,12 +80,12 @@
 
     <div style="margin-left:200px;">
     <div class="container">
-        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="250px">
+        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="300px">
         <div id="menu">
             @include('menu')
         </div>
         
-        <h1 class="h1 fw-bold">Liste Bon de carburant</h1>
+        <h1 class="h1 fw-bold">Liste de consomation de caburant </h1>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>

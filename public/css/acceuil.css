@@ -6,19 +6,6 @@ h1{
     text-align: center;
 }
 
-
-#menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;          
-    height: 60px;      
-    z-index: 1030;
-    display: flex;
-    align-items: center;
-    padding: 0 1rem;
-}
-
 #menu1{
     position: fixed;
     width: 200px;

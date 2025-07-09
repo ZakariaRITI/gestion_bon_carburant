@@ -68,9 +68,18 @@ class AdminController extends Controller
 
      public function enregistrer(Request $request)
      {
+        $exists = Bon::where('n_bon', $request->n_bon)->exists();
+
+        if ($exists) 
+        {
+            return back()
+                ->withInput()
+                ->withErrors(['n_bon' => 'Ce numéro de bon existe déjà.']);
+        }
+
          $n_bon=$request->n_bon;
          $type_carburant=$request->type_carburant;
-         $prix=$request->prix;
+         $prix=$request->prix;  
          $quantite=$request->quantite;
          $date_bon=$request->date_bon;
          $date_saisis=$request->date_saisis;
@@ -97,7 +106,35 @@ class AdminController extends Controller
 
          $bon->save();
          return redirect('/acc');
+     }
 
+     public function prixcarburant()
+     {
+      $c=new Carburant();
+      $carburant=$c->all();
+      $carb=[];
+      $i=0;
+
+      foreach($carburant as $ca)
+      {
+        $carb[$i]=$ca->prix;
+        $i++;
+      }
+      return view('prixcarburant',compact('carb'));
+     }
+
+     public function modifiercarburant(Request $request)
+     {
+        $objcarburant=new Carburant();
+        $carburanta=$objcarburant->find(1);
+        $a=$request->input('essence');
+        $carburanta->prix=$a;
+        $carburantb=$objcarburant->find(2);
+        $b=$request->input('diesel');
+        $carburantb->prix=$b;
+        $carburanta->save();
+        $carburantb->save();
+        return redirect('/acc');
      }
 
 }
