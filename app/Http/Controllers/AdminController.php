@@ -137,4 +137,55 @@ class AdminController extends Controller
         return redirect('/acc');
      }
 
+     public function recherche_nbon(Request $request)
+     {
+         $motcle=$request->input('motcle');
+         $bons = collect(); 
+
+         if(!empty($motcle))
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->where('n_bon', 'like', '%'.$motcle.'%')
+            ->get();
+         }
+         return view('rechercher_bon', compact('bons','motcle'));
+      }
+
+      public function recherche_nmatricule(Request $request)
+      {
+         $motcle = $request->input('motcle');
+         $bons = collect();
+
+         if (!empty($motcle)) 
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->whereHas('preneur', function ($query) use ($motcle) 
+            {
+            $query->where('n_matricule', 'like', '%'.$motcle.'%');
+            })
+            ->get();
+         }
+
+         return view('rechercher_matricule', compact('bons', 'motcle'));
+      }
+
+      public function recherche_nvehicule(Request $request)
+      {
+         $motcle = $request->input('motcle');
+         $bons = collect();
+
+         if (!empty($motcle)) 
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->whereHas('vehicule', function ($query) use ($motcle) 
+            {
+            $query->where('n_vehicule', 'like', '%'.$motcle.'%');
+            })
+            ->get();
+         }
+
+         return view('rechercher_vehicule', compact('bons', 'motcle'));
+      }
 }
+
+

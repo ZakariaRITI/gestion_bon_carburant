@@ -13,13 +13,13 @@
         <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/acc">Acceuil</a></li>
         <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/ab">Ajouter</a></li>
         <li class="nav-item dropdown">
-            <a class="nav-link text-white fs-4 fw-bold dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"" href="">
+            <a class="nav-link text-white fs-4 fw-bold dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="">
                 Rechercher
             </a>
              <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">par n° Bon</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">par n° Matricule</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">par n° Vehicule</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchb">par n° Bon</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchm">par n° Matricule</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchv">par n° Vehicule</a></li>
                 </ul>
         </li>
         <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/pc">Prix carburant</a></li>

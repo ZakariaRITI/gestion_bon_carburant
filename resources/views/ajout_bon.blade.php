@@ -27,10 +27,10 @@
                     @endforeach
                 </select>
             <label for="p" class="form-label">prix:</label> <input type="text" id="p" name="prix" class="form-control" readonly>
-            <label for="q" class="form-label">quantite(L):</label><br><input type="number" step="0.5" class="form-control" name="quantite" id="q" min="0" required> <br>
+            <label for="q" class="form-label">quantite(L):</label><br><input type="number" step="0.5" class="form-control" name="quantite" id="q" min="0" required> 
             <label for="db" class="form-label">date_bon:</label> <br> <input type="date" id="db" name="date_bon" class="form-date" required> <br>
             <label for="ds" class="form-label">date_saisis:</label><br> <input type="date" id="ds" name="date_saisis" class="form-date" required><br>
-            <label for="s" class="form-label">site:</label><br>
+            <label for="s" class="form-label">site:</label>
             <select name="site" id="s" class="form-select" required>
                 <option value="">---Selectionner un site---</option>
                 @foreach($sites as $s)

@@ -10,6 +10,9 @@ Route::get('/save',[AdminController::class,'enregistrer']);
 Route::get('/pc',[AdminController::class,'prixcarburant']);
 Route::get('/pcs',[AdminController::class,'modifiercarburant']);
 Route::get('/profile',[AdminController::class,'profile']);
+Route::get('/searchb',[AdminController::class,'recherche_nbon']);
+Route::get('/searchm',[AdminController::class,'recherche_nmatricule']);
+Route::get('/searchv',[AdminController::class,'recherche_nvehicule']);
 
 Route::get('/', function () {
     return view('welcome');
