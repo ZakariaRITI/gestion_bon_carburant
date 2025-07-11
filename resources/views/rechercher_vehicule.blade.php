@@ -15,7 +15,7 @@
         <h1 class="h1 text-center">Recherche par n°Vehicule</h1>
         <div class="d-flex justify-content-center mt-4">
         <form action="" method="get" class="d-flex gap-2 mt-4" style="max-width: 400px;">
-            <label for="s" class="form-label"></label><input type="search" class="form-control" value="{{ $motcle ?? '' }}" name="motcle" id="s" placeholder="n°bon">
+            <label for="s" class="form-label"></label><input type="search" class="form-control" value="{{ $motcle ?? '' }}" name="motcle" id="s" placeholder="n°vehicule">
             <input type="submit" value="rechercher" class="btn btn-primary">
         </div>
         </form>

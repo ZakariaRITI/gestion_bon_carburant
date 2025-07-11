@@ -123,8 +123,8 @@
                     <td><?php echo $ve[$i]->n_vehicule ?></td>
                     <td><?php echo $pr[$i]->nom ?></td>
                     <td><?php echo $ut[$i]->name ?></td>
-                    <td><a href="" class="btn btn-warning">update</a></td>
-                    <td><a href="" class="btn btn-danger">delete</a></td>
+                    <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
+                    <td><a href="/delete?id={{$b->id}}" class="btn btn-danger" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');">delete</a></td>
                 </tr>
             </tbody>
             <?php 

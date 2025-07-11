@@ -13,6 +13,9 @@ Route::get('/profile',[AdminController::class,'profile']);
 Route::get('/searchb',[AdminController::class,'recherche_nbon']);
 Route::get('/searchm',[AdminController::class,'recherche_nmatricule']);
 Route::get('/searchv',[AdminController::class,'recherche_nvehicule']);
+Route::get('/update',[AdminController::class,'update_bon']);
+Route::post('/modifier',[AdminController::class,'modifier_bon']);
+Route::get('/delete',[AdminController::class,'supprimer_bon']);
 
 Route::get('/', function () {
     return view('welcome');
