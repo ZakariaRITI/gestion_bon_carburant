@@ -16,6 +16,8 @@ Route::get('/searchv',[AdminController::class,'recherche_nvehicule']);
 Route::get('/update',[AdminController::class,'update_bon']);
 Route::post('/modifier',[AdminController::class,'modifier_bon']);
 Route::get('/delete',[AdminController::class,'supprimer_bon']);
+Route::get('/impression/{type}', [AdminController::class, 'impression']);
+
 
 Route::get('/', function () {
     return view('welcome');

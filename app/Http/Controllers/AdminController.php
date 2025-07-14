@@ -11,6 +11,8 @@ use App\Models\Utilisateur;
 use App\Models\Vehicule;
 use App\Models\User;
 use App\Models\Carburant;
+use Illuminate\Support\Facades\DB;
+
 
 class AdminController extends Controller
 {
@@ -257,6 +259,41 @@ class AdminController extends Controller
        $bon=Bon::find($id);
        $bon->delete();
        return redirect('/acc');
+      }
+
+      public function impression($type,Request $request)
+      {
+         $start=$request->input('start');
+         $end=$request->input('end');
+
+         switch ($type) 
+         {
+        case 'site':
+            $bons = DB::table('bons')
+            ->select(
+               'site',
+               'type_carburant',
+               DB::raw('SUM(quantite) as total_quantite'),
+               DB::raw('SUM(valeur) as total_valeur')
+            )
+            ->whereBetween('date_bon', [$start, $end])
+            ->groupBy('site', 'type_carburant')
+            ->orderBy('site')
+            ->get()
+            ->groupBy('site');
+
+            return view('impression_site',compact('start','end','bons'));
+        case 'service':
+            return view('impression.service');
+        case 'vehicule':
+            return view('impression.vehicule');
+        case 'preneur':
+            return view('impression.preneur');
+        case 'journee':
+            return view('impression.journee');
+        default:
+            abort(404); // si le type n'existe pas
+         }
       }
 }
 
