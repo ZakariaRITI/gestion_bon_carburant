@@ -271,14 +271,14 @@ class AdminController extends Controller
         case 'site':
             $bons = DB::table('bons')
             ->select(
-               'site',
+               'site_id',
                'type_carburant',
                DB::raw('SUM(quantite) as total_quantite'),
-               DB::raw('SUM(valeur) as total_valeur')
+               DB::raw('SUM(total) as total_valeur')
             )
             ->whereBetween('date_bon', [$start, $end])
-            ->groupBy('site', 'type_carburant')
-            ->orderBy('site')
+            ->groupBy('site_id', 'type_carburant')
+            ->orderBy('site_id')
             ->get()
             ->groupBy('site');
 
