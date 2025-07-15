@@ -19,10 +19,10 @@
                 Rechercher
             </a>
              <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchb">par n° Bon</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchm">par n° Matricule</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchv">par n° Vehicule</a></li>
-                </ul>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchb" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">par n° Bon</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchm" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">par n° Matricule</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/searchv" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">par n° Vehicule</a></li>
+             </ul>
         </li>
         <li class="nav-item"><a class="nav-link text-white fs-4 fw-bold" href="/pc">Prix carburant</a></li>
         <li class="nav-item dropdown" style="margin-right: 150px;">

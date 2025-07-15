@@ -268,23 +268,32 @@ class AdminController extends Controller
 
          switch ($type) 
          {
-        case 'site':
+         case 'site':
             $bons = DB::table('bons')
-            ->select(
-               'site_id',
-               'type_carburant',
-               DB::raw('SUM(quantite) as total_quantite'),
-               DB::raw('SUM(total) as total_valeur')
-            )
-            ->whereBetween('date_bon', [$start, $end])
-            ->groupBy('site_id', 'type_carburant')
-            ->orderBy('site_id')
+            ->join('sites', 'bons.site_id', '=', 'sites.id')
+            ->select('sites.code_site','sites.nom_site',
+            DB::raw('LOWER(bons.type_carburant) as type_carburant'),  // force minuscule ici
+            DB::raw('SUM(bons.quantite) as total_quantite'),
+            DB::raw('SUM(bons.total) as total_valeur'))
+            ->whereBetween('bons.date_bon', [$start, $end])
+            ->groupBy('sites.id', 'sites.code_site', 'sites.nom_site', DB::raw('LOWER(bons.type_carburant)'))
+            ->orderBy('sites.code_site')
             ->get()
-            ->groupBy('site');
-
+            ->groupBy('code_site');
             return view('impression_site',compact('start','end','bons'));
         case 'service':
-            return view('impression.service');
+            $bons = DB::table('bons')
+            ->join('services', 'bons.service_id', '=', 'services.id')
+            ->select('services.code_service','services.nom_service',
+            DB::raw('LOWER(bons.type_carburant) as type_carburant'),  // force minuscule ici
+            DB::raw('SUM(bons.quantite) as total_quantite'),
+            DB::raw('SUM(bons.total) as total_valeur'))
+            ->whereBetween('bons.date_bon', [$start, $end])
+            ->groupBy('services.id', 'services.code_service', 'services.nom_service', DB::raw('LOWER(bons.type_carburant)'))
+            ->orderBy('services.code_service')
+            ->get()
+            ->groupBy('code_service');
+            return view('impression_service',compact('start','end','bons'));
         case 'vehicule':
             return view('impression.vehicule');
         case 'preneur':

@@ -23,8 +23,8 @@
                 Site
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Ajouter site</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion site</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter site</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion site</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -32,8 +32,8 @@
                 Service
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Ajouter service</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion service</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter service</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion service</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -41,8 +41,8 @@
                 Vehicule
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Ajouter Vehicule</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion Vehicule</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Vehicule</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Vehicule</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -50,8 +50,8 @@
                 Preneur
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Ajouter Preneur</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion Preneur</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Preneur</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Preneur</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -59,8 +59,8 @@
                 Utilisateur
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Ajouter Utilisateur</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#">Gestion Utilisateur</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Utilisateur</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Utilisateur</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-white">Support & Aide</a></li>
