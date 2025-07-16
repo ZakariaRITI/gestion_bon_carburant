@@ -16,7 +16,7 @@
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
-        <h4 class="border p-1 d-inline-block">ETAT RECAPITULATIF PAR SERVICE</h4>
+        <h4 class="border p-1 d-inline-block">ETAT DE CONSOMMATION DE CARBURANT PAR SERVICE</h4>
 
         <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p> <br> <br> <br>
 
@@ -40,6 +40,10 @@
         <tbody class="tbody">
             @php
                 $totalGeneralValeur = 0;
+                $totalgeneralessence=0;
+                $totalgeneraldiesel=0;
+                $totalqessence=0;
+                $totalqdiesel=0;
             @endphp 
             @foreach ($bons as $codeservice => $serviceBons)
              @php
@@ -61,6 +65,10 @@
 
                 $totalValeur = $serviceBons->sum('total_valeur');
                 $totalGeneralValeur += $totalValeur;
+                $totalgeneralessence += $essenceValeur;
+                $totalgeneraldiesel += $gasoilValeur;
+                $totalqessence+=$essenceQuantite;
+                $totalqdiesel+=$gasoilQuantite;
              @endphp
             <tr class="text-center">
                 <td>{{ $codeservice }}</td>
@@ -76,7 +84,11 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="6" class="fs-2">Total general</td>
+                <td colspan="2" class="fs-2">Total general</td>
+                <td>{{ number_format($totalqessence, 2, ',', ' ') }}</td>
+                <td>{{ number_format($totalgeneralessence, 2, ',', ' ') }}</td>
+                <td>{{ number_format($totalqdiesel, 2, ',', ' ') }}</td>
+                <td>{{ number_format($totalgeneraldiesel, 2, ',', ' ') }}</td>
                 <td>{{ number_format($totalGeneralValeur, 2, ',', ' ') }}</td>
             </tr>
         </tbody>

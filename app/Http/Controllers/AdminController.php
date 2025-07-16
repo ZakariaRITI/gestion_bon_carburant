@@ -295,7 +295,17 @@ class AdminController extends Controller
             ->groupBy('code_service');
             return view('impression_service',compact('start','end','bons'));
         case 'vehicule':
-            return view('impression.vehicule');
+            $bons = Bon::join('vehicules', 'bons.vehicule_id', '=', 'vehicules.id')
+            ->select('bons.vehicule_id','vehicules.n_vehicule','vehicules.marque',
+            DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+            DB::raw('SUM(bons.quantite) as total_quantite'),
+            DB::raw('SUM(bons.total) as total_valeur'))
+            ->whereBetween('bons.date_bon', [$start, $end])
+            ->groupBy('bons.vehicule_id','vehicules.n_vehicule','vehicules.marque',
+            DB::raw('LOWER(bons.type_carburant)'))
+            ->get()
+            ->groupBy('vehicule_id');
+            return view('impression_vehicule',compact('start','end','bons'));
         case 'preneur':
             return view('impression.preneur');
         case 'journee':

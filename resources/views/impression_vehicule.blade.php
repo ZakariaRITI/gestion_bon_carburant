@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impression Site</title>
+    <title>Impression Vehicule</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 </head>
@@ -16,21 +16,21 @@
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
-        <h4 class="border p-1 d-inline-block">ETAT RECAPITULATIF PAR SITE</h4>
+        <h4 class="border p-1 d-inline-block">ETAT DE CONSOMMATION DE CARBURANT PAR VEHICULE</h4>
 
         <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p> <br> <br> <br>
-
+         
         <table class="table table-bordered border-dark">
         <thead class="thead">
             <tr class="text-center">
-                <th colspan="2">SITE</th>
+                <th colspan="2">Vehicule</th>
                 <th colspan="2">ESSENCE</th>
                 <th colspan="2">GASOIL</th>
                 <th rowspan="2">TOTAL</th>
             </tr>
             <tr class="text-center">
-            <th>Code</th>
-            <th>Nom</th>
+            <th>Numero</th>
+            <th>marque</th>
             <th>Quantité</th>
             <th>Valeur</th>
             <th>Quantité</th>
@@ -45,26 +45,26 @@
                 $totalqessence=0;
                 $totalqdiesel=0;
             @endphp    
-            @foreach ($bons as $codeSite => $siteBons)
+            @foreach ($bons as $n_vehicule => $vehiculeBons)
              @php
 
-                $essenceQuantite = $siteBons
+                $essenceQuantite = $vehiculeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
                     ->sum('total_quantite');
 
-                $essenceValeur = $siteBons
+                $essenceValeur = $vehiculeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
                     ->sum('total_valeur');
 
-                $gasoilQuantite = $siteBons
+                $gasoilQuantite = $vehiculeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'diesel')
                     ->sum('total_quantite');
 
-                $gasoilValeur = $siteBons
+                $gasoilValeur = $vehiculeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'diesel')
                     ->sum('total_valeur');
 
-                $totalValeur = $siteBons->sum('total_valeur');
+                $totalValeur = $vehiculeBons->sum('total_valeur');
                 $totalGeneralValeur += $totalValeur;
                 $totalgeneralessence += $essenceValeur;
                 $totalgeneraldiesel += $gasoilValeur;
@@ -72,8 +72,8 @@
                 $totalqdiesel+=$gasoilQuantite;
              @endphp
             <tr class="text-center">
-                <td>{{ $codeSite }}</td>
-                <td>{{ $siteBons->first()->nom_site }}</td>
+                <td>{{ $vehiculeBons->first()->n_vehicule }}</td>
+                <td>{{ $vehiculeBons->first()->marque }}</td>
 
                 <td>{{ $essenceQuantite }}</td>
                 <td>{{ number_format($essenceValeur, 2, ',', ' ') }}</td>
@@ -94,6 +94,7 @@
             </tr>
         </tbody>
         </table>
+        <div class="d-flex flex-wrap gap-3 mb-5"> 
         <span style="margin-left:700px; margin-top:200px; display: inline-block;" class="fs-4">Imprimer par:</span>
         <span style="margin-left:700px; margin-bottom:200px; display: inline-block;" class="fw-bold fs-4">{{ Auth::user()->name }}</span>
     </div>
