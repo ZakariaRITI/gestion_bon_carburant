@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impression Service</title>
+    <title>Impression Journee</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 </head>
@@ -16,30 +16,29 @@
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
-        <h4 class="border p-1 d-inline-block">ETAT DE CONSOMMATION DE CARBURANT PAR SERVICE</h4>
+        <h4 class="border p-1 d-inline-block">ETAT DE CONSOMMATION DE CARBURANT PAR JOURNEE</h4>
 
         <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p>
-
-        <a href="/impression-site-pdf/service?start={{ $start }}&end={{ $end }}" target="_blank" class="btn btn-success float-end fw-bold">
+        <a href="/impression-site-pdf/journee?start={{ $start }}&end={{ $end }}" target="_blank" class="btn btn-success float-end fw-bold">
             Télécharger / Imprimer PDF
-       </a> <br> <br> <br>
+       </a> <br> <br> 
 
         <table class="table table-bordered border-dark">
         <thead class="thead">
             <tr class="text-center">
-                <th colspan="2">SERVICE</th> 
+                <th colspan="2">PRENEUR</th> 
                 <th colspan="2">ESSENCE</th>
                 <th colspan="2">GASOIL</th>
                 <th rowspan="2">TOTAL</th>
             </tr>
             <tr class="text-center">
-            <th>Code</th>
-            <th>Nom</th>
+            <th>Date Bon</th>
+            <th>n°Bon</th>
             <th>Quantité</th>
             <th>Valeur</th>
             <th>Quantité</th>
             <th>Valeur</th>
-        </tr>
+            </tr>
         </thead>
         <tbody class="tbody">
             @php
@@ -49,25 +48,25 @@
                 $totalqessence=0;
                 $totalqdiesel=0;
             @endphp 
-            @foreach ($bons as $codeservice => $serviceBons)
+            @foreach ($bons as $codejournee => $journeeBons)
              @php
-                $essenceQuantite = $serviceBons
+                $essenceQuantite = $journeeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
                     ->sum('total_quantite');
 
-                $essenceValeur = $serviceBons
+                $essenceValeur = $journeeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
                     ->sum('total_valeur');
 
-                $gasoilQuantite = $serviceBons
+                $gasoilQuantite = $journeeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'diesel')
                     ->sum('total_quantite');
 
-                $gasoilValeur = $serviceBons
+                $gasoilValeur = $journeeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'diesel')
                     ->sum('total_valeur');
 
-                $totalValeur = $serviceBons->sum('total_valeur');
+                $totalValeur = $journeeBons->sum('total_valeur');
                 $totalGeneralValeur += $totalValeur;
                 $totalgeneralessence += $essenceValeur;
                 $totalgeneraldiesel += $gasoilValeur;
@@ -75,8 +74,8 @@
                 $totalqdiesel+=$gasoilQuantite;
              @endphp
             <tr class="text-center">
-                <td>{{ $codeservice }}</td>
-                <td>{{ $serviceBons->first()->nom_service }}</td>
+                <td>{{ $journeeBons->first()->date_bon }}</td>
+                <td>{{ $journeeBons->first()->n_bon }}</td>
 
                 <td>{{ $essenceQuantite }}</td>
                 <td>{{ number_format($essenceValeur, 2, ',', ' ') }}</td>

@@ -17,11 +17,15 @@
         <form action="" method="get" class="d-flex gap-2 mt-4" style="max-width: 400px;">
             <label for="s" class="form-label"></label><input type="search" class="form-control" value="{{ $motcle ?? '' }}" name="motcle" id="s" placeholder="n°bon">
             <input type="submit" value="rechercher" class="btn btn-primary">
-        </div>
         </form>
-    </div><br>
+        </div>
+    <br> <br> 
+        <a href="/impression-bon-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-success float-end fw-bold">
+            Télécharger / Imprimer PDF
+       </a>
+
     @if($bons->isNotEmpty())
-    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1>
+    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1> <br>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>
@@ -69,5 +73,6 @@
         @elseif(!empty($motcle))
         <p class="text-center text-danger fw-bold">le N°Bon saisis n'est pas disponible</p>
         @endif
+        </div>
 </body>
 </html>

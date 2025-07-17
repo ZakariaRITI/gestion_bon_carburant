@@ -13,12 +13,17 @@
     </div> <br> <br> <br> <br> <br>
 
     <div class="container">
+
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
         <h4 class="border p-1 d-inline-block">ETAT RECAPITULATIF PAR SITE</h4>
 
-        <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p> <br> <br> <br>
+        <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p>
+
+       <a href="/impression-site-pdf/site?start={{ $start }}&end={{ $end }}" target="_blank" class="btn btn-success float-end fw-bold">
+            Télécharger / Imprimer PDF
+       </a> <br> <br> <br>
 
         <table class="table table-bordered border-dark">
         <thead class="thead">

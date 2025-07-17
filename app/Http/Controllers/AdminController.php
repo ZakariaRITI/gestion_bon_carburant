@@ -12,6 +12,7 @@ use App\Models\Vehicule;
 use App\Models\User;
 use App\Models\Carburant;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 
 class AdminController extends Controller
@@ -151,6 +152,24 @@ class AdminController extends Controller
             ->get();
          }
          return view('rechercher_bon', compact('bons','motcle'));
+      }
+
+      public function pdf_recherche_nbon(Request $request)
+     {
+         $motcle=$request->input('motcle');
+         $bons = collect(); 
+
+         if(!empty($motcle))
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->where('n_bon', 'like', '%'.$motcle.'%')
+            ->get();
+         }
+         
+         $pdf = PDF::loadView('pdf/nbon', compact('bons','motcle'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_nbon.pdf');
       }
 
       public function recherche_nmatricule(Request $request)
@@ -307,13 +326,133 @@ class AdminController extends Controller
             ->groupBy('vehicule_id');
             return view('impression_vehicule',compact('start','end','bons'));
         case 'preneur':
-            return view('impression.preneur');
+            $bons = Bon::join('preneurs', 'bons.preneur_id', '=', 'preneurs.id')
+            ->select('bons.preneur_id','preneurs.n_matricule','preneurs.nom',
+            DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+            DB::raw('SUM(bons.quantite) as total_quantite'),
+            DB::raw('SUM(bons.total) as total_valeur'))
+            ->whereBetween('bons.date_bon', [$start, $end])
+            ->groupBy('bons.preneur_id','preneurs.n_matricule','preneurs.nom',
+            DB::raw('LOWER(bons.type_carburant)'))
+            ->get()
+            ->groupBy('preneur_id');
+            return view('impression_preneur',compact('start','end','bons'));
         case 'journee':
-            return view('impression.journee');
+            $bons=DB::table("bons")
+            ->select('bons.n_bon','bons.date_bon',
+            DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+            DB::raw('SUM(quantite) as total_quantite'),
+            DB::raw('SUM(total) as total_valeur'))
+            ->whereBetween('bons.date_bon',[$start,$end])
+            ->groupBy('bons.n_bon','bons.date_bon',DB::raw('LOWER(type_carburant)'))
+            ->orderBy('date_bon')
+            ->get()
+            ->groupBy('date_bon');
+            return view('impression_journee',compact('start','end','bons'));
         default:
             abort(404); // si le type n'existe pas
          }
       }
+
+      public function pdf($type, Request $request)
+      {
+         $start = $request->input('start');
+         $end = $request->input('end');
+
+         switch ($type) 
+         {
+            case 'site':
+                  $bons = DB::table('bons')
+                     ->join('sites', 'bons.site_id', '=', 'sites.id')
+                     ->select('sites.code_site', 'sites.nom_site',
+                        DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+                        DB::raw('SUM(bons.quantite) as total_quantite'),
+                        DB::raw('SUM(bons.total) as total_valeur'))
+                     ->whereBetween('bons.date_bon', [$start, $end])
+                     ->groupBy('sites.id', 'sites.code_site', 'sites.nom_site', DB::raw('LOWER(bons.type_carburant)'))
+                     ->orderBy('sites.code_site')
+                     ->get()
+                     ->groupBy('code_site');
+
+                  $pdf = PDF::loadView('pdf/site', compact('start', 'end', 'bons'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_sites.pdf');
+
+            case 'service':
+                  $bons = DB::table('bons')
+                     ->join('services', 'bons.service_id', '=', 'services.id')
+                     ->select('services.code_service', 'services.nom_service',
+                        DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+                        DB::raw('SUM(bons.quantite) as total_quantite'),
+                        DB::raw('SUM(bons.total) as total_valeur'))
+                     ->whereBetween('bons.date_bon', [$start, $end])
+                     ->groupBy('services.id', 'services.code_service', 'services.nom_service', DB::raw('LOWER(bons.type_carburant)'))
+                     ->orderBy('services.code_service')
+                     ->get()
+                     ->groupBy('code_service');
+
+                  $pdf = PDF::loadView('pdf/service', compact('start', 'end', 'bons'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_services.pdf');
+
+            case 'vehicule':
+                  $bons = Bon::join('vehicules', 'bons.vehicule_id', '=', 'vehicules.id')
+                     ->select('bons.vehicule_id', 'vehicules.n_vehicule', 'vehicules.marque',
+                        DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+                        DB::raw('SUM(bons.quantite) as total_quantite'),
+                        DB::raw('SUM(bons.total) as total_valeur'))
+                     ->whereBetween('bons.date_bon', [$start, $end])
+                     ->groupBy('bons.vehicule_id', 'vehicules.n_vehicule', 'vehicules.marque', DB::raw('LOWER(bons.type_carburant)'))
+                     ->orderBy('vehicules.n_vehicule')
+                     ->get()
+                     ->groupBy('vehicule_id');
+
+                  $pdf = PDF::loadView('pdf/vehicule', compact('start', 'end', 'bons'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_vehicules.pdf');
+
+            case 'preneur':
+                  $bons = Bon::join('preneurs', 'bons.preneur_id', '=', 'preneurs.id')
+                     ->select('bons.preneur_id', 'preneurs.n_matricule', 'preneurs.nom',
+                        DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+                        DB::raw('SUM(bons.quantite) as total_quantite'),
+                        DB::raw('SUM(bons.total) as total_valeur'))
+                     ->whereBetween('bons.date_bon', [$start, $end])
+                     ->groupBy('bons.preneur_id', 'preneurs.n_matricule', 'preneurs.nom', DB::raw('LOWER(bons.type_carburant)'))
+                     ->orderBy('preneurs.nom')
+                     ->get()
+                     ->groupBy('preneur_id');
+
+                  $pdf = PDF::loadView('pdf/preneur', compact('start', 'end', 'bons'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_preneurs.pdf');
+
+            case 'journee':
+                  $bons = DB::table('bons')
+                     ->select('bons.n_bon', 'bons.date_bon',
+                        DB::raw('LOWER(bons.type_carburant) as type_carburant'),
+                        DB::raw('SUM(quantite) as total_quantite'),
+                        DB::raw('SUM(total) as total_valeur'))
+                     ->whereBetween('bons.date_bon', [$start, $end])
+                     ->groupBy('bons.n_bon', 'bons.date_bon', DB::raw('LOWER(type_carburant)'))
+                     ->orderBy('bons.date_bon')
+                     ->get()
+                     ->groupBy('date_bon');
+
+                  $pdf = PDF::loadView('pdf/journee', compact('start', 'end', 'bons'))
+                  ->setPaper('a4', 'portrait');
+
+                   return $pdf->stream('rapport_journees.pdf');
+
+            default:
+                  abort(404, 'Type de rapport non trouvé');
+         }
+      }
+
 }
 
 

@@ -19,9 +19,9 @@
             <input type="submit" value="rechercher" class="btn btn-primary">
         </div>
         </form>
-    </div><br>
+    <br>
     @if($bons->isNotEmpty())
-    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°Matricule du preneur</h1>
+    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°Matricule du preneur</h1> <br>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>
@@ -69,5 +69,6 @@
         @elseif(!empty($motcle))
         <p class="text-center text-danger fw-bold">le n°matricule saisis n'est pas disponible</p>
         @endif
+        </div>
 </body>
 </html>
