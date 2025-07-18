@@ -21,6 +21,9 @@
         </form>
     <br>
     @if($bons->isNotEmpty())
+    <a href="/impression-vehicule-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-success float-end fw-bold">
+            Télécharger / Imprimer PDF
+    </a>
     <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°vehicule</h1> <br>
         <table class="table table-bordered">
             <thead class="table-primary">

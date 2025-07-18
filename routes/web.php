@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Exports\BonsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/acc',[AdminController::class,'display']);
@@ -17,8 +19,11 @@ Route::get('/update',[AdminController::class,'update_bon']);
 Route::post('/modifier',[AdminController::class,'modifier_bon']);
 Route::get('/delete',[AdminController::class,'supprimer_bon']);
 Route::get('/impression/{type}', [AdminController::class, 'impression']);
+Route::get('/impression-site-pdf/{type}', [AdminController::class, 'pdf']);
 Route::get('/impression-bon-pdf', [AdminController::class, 'pdf_recherche_nbon']);
-
+Route::get('/impression-matricule-pdf', [AdminController::class, 'pdf_recherche_nmatricule']);
+Route::get('/impression-vehicule-pdf', [AdminController::class, 'pdf_recherche_nvehicule']);
+Route::get('/export-excel', [AdminController::class, 'exportExcelBon']);
 
 Route::get('/', function () {
     return view('welcome');

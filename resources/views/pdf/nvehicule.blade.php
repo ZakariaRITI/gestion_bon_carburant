@@ -41,7 +41,7 @@
 <body>
 
     <div class="container">
-        <span class="fw-bold fs-3">Auto all</span>
+        <span class="fw-bold fs-3">Auto Hall</span>
         <span style="float: right;" class="fs-3">
             Le {{ \Carbon\Carbon::now()->format('d/m/Y H:i') }}
         </span>

@@ -19,9 +19,12 @@
             <input type="submit" value="rechercher" class="btn btn-primary">
         </div>
         </form>
-    <br>
+    <br> <br>
     @if($bons->isNotEmpty())
-    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°Matricule du preneur</h1> <br>
+    <a href="/impression-matricule-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-success float-end fw-bold">
+            Télécharger / Imprimer PDF
+    </a>
+    <h2 class="h2 fw-bold text-center">Liste de consomation de caburant par n°Matricule du preneur</h2> <br>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>

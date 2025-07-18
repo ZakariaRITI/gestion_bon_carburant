@@ -12,6 +12,8 @@ use App\Models\Vehicule;
 use App\Models\User;
 use App\Models\Carburant;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BonsExport;
 use PDF;
 
 
@@ -190,6 +192,27 @@ class AdminController extends Controller
          return view('rechercher_matricule', compact('bons', 'motcle'));
       }
 
+      public function pdf_recherche_nmatricule(Request $request)
+      {
+         $motcle = $request->input('motcle');
+         $bons = collect();
+
+         if (!empty($motcle)) 
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->whereHas('preneur', function ($query) use ($motcle) 
+            {
+            $query->where('n_matricule', 'like', '%'.$motcle.'%');
+            })
+            ->get();
+         }
+
+         $pdf = PDF::loadView('pdf/nmatricule', compact('bons','motcle'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_nmatricule.pdf');
+      }
+
       public function recherche_nvehicule(Request $request)
       {
          $motcle = $request->input('motcle');
@@ -206,6 +229,27 @@ class AdminController extends Controller
          }
 
          return view('rechercher_vehicule', compact('bons', 'motcle'));
+      }
+
+      public function pdf_recherche_nvehicule(Request $request)
+      {
+         $motcle = $request->input('motcle');
+         $bons = collect();
+
+         if (!empty($motcle)) 
+         {
+            $bons = Bon::with(['site', 'service', 'vehicule', 'preneur', 'utilisateur'])
+            ->whereHas('vehicule', function ($query) use ($motcle) 
+            {
+            $query->where('n_vehicule', 'like', '%'.$motcle.'%');
+            })
+            ->get();
+         }
+
+         $pdf = PDF::loadView('pdf/nvehicule', compact('bons','motcle'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_nvehicule.pdf');
       }
 
       public function update_bon(Request $request)
@@ -452,6 +496,14 @@ class AdminController extends Controller
                   abort(404, 'Type de rapport non trouvé');
          }
       }
+
+       public function exportExcelBon(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        return Excel::download(new BonsExport($start, $end), 'sites.xlsx');
+    }
 
 }
 
