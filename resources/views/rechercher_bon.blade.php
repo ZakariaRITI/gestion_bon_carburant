@@ -22,10 +22,14 @@
     <br> <br> 
 
     @if($bons->isNotEmpty())
-    <a href="/impression-bon-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-success float-end fw-bold">
+    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1> <br>
+    <a href="/impression-bon-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
     </a>
-    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1> <br>
+
+    <a href="/export-excel_nbon?motcle={{ $motcle }}" class="btn btn-success text-white fw-bold" style="margin-left:800px">
+        Exporter vers Excel
+    </a> <br> <br>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>

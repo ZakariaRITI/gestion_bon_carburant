@@ -85,7 +85,15 @@
             @include('menu')
         </div>
         
-        <h1 class="h1 fw-bold">Liste de consomation de caburant </h1>
+        <h1 class="h1 fw-bold">Liste de consomation de caburant </h1> <br>
+        <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
+            Télécharger / Imprimer PDF
+       </a> 
+
+       <a href="/export-excel_service" class="btn btn-success text-white fw-bold" style="margin-left:800px">
+        Exporter vers Excel
+       </a>
+       <br> <br> <br>
         <table class="table table-bordered">
             <thead class="table-primary">
                 <tr>

@@ -14,6 +14,13 @@ use App\Models\Carburant;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\BonsExport;
+use App\Exports\ServiceExport;
+use App\Exports\VehiculeExport;
+use App\Exports\PreneurExport;
+use App\Exports\JourneeExport;
+use App\Exports\NbonExport;
+use App\Exports\NmatriculeExport;
+use App\Exports\NvehiculeExport;
 use PDF;
 
 
@@ -398,6 +405,38 @@ class AdminController extends Controller
          }
       }
 
+      public function pdf_acc()
+      {
+        $bon=new Bon();
+        $bons=$bon->all();
+
+        $site=new Site();
+        $service=new Service();
+        $vehicule=new Vehicule();
+        $preneur=new Preneur();
+        $utilisateur=new User();
+
+        $si=[];
+        $se=[];
+        $ve=[];
+        $pr=[];
+        $ut=[];
+        $i=0;
+        foreach ($bons as $bon) 
+        {
+            $si[$i]=$site->find($bon->site_id);
+            $se[$i]=$service->find($bon->service_id);
+            $ve[$i]=$vehicule->find($bon->vehicule_id);
+            $pr[$i]=$preneur->find($bon->preneur_id);
+            $ut[$i]=$utilisateur->find($bon->utilisateur_id);
+            $i++;
+        }
+                $pdf = PDF::loadView('pdf/acc',compact('bons','si','se','ve','pr','ut'))
+                  ->setPaper('a4', 'portrait');
+
+                  return $pdf->stream('rapport_acc.pdf');
+      }
+
       public function pdf($type, Request $request)
       {
          $start = $request->input('start');
@@ -417,7 +456,7 @@ class AdminController extends Controller
                      ->orderBy('sites.code_site')
                      ->get()
                      ->groupBy('code_site');
-
+                  
                   $pdf = PDF::loadView('pdf/site', compact('start', 'end', 'bons'))
                   ->setPaper('a4', 'portrait');
 
@@ -505,6 +544,56 @@ class AdminController extends Controller
         return Excel::download(new BonsExport($start, $end), 'sites.xlsx');
     }
 
-}
+    public function exportExcelservice(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        return Excel::download(new ServiceExport($start, $end), 'services.xlsx');
+    }
+
+    public function exportExcelvehicule(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        return Excel::download(new VehiculeExport($start, $end), 'vehicules.xlsx');
+    }
+
+    public function exportExcelpreneur(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        return Excel::download(new PreneurExport($start, $end), 'preneurs.xlsx');
+    }
+
+    public function exportExceljournee(Request $request)
+    {
+        $start = $request->start;
+        $end = $request->end;
+
+        return Excel::download(new JourneeExport($start, $end), 'journees.xlsx');
+    }
+
+    public function exportExcelnbon(Request $request)
+    {
+        $motcle=$request->motcle;
+        return Excel::download(new NbonExport($motcle), 'nbon.xlsx');
+    }
+
+    public function exportExcelnmatricule(Request $request)
+    { 
+        $motcle=$request->motcle;
+        return Excel::download(new NmatriculeExport($motcle), 'nmatricule.xlsx');
+    }
+
+    public function exportExcelnvehicule(Request $request)
+    {
+        $motcle=$request->motcle;
+        return Excel::download(new NvehiculeExport($motcle), 'nvehicule.xlsx');
+    }
+
+}  
 
 

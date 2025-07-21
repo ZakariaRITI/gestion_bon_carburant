@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 
-class BonsExport implements FromView
+class PreneurExport implements FromView
 {
     protected $start;
     protected $end;
@@ -20,17 +20,17 @@ class BonsExport implements FromView
 
     public function view(): View
     {
-        $bons = Bon::select('sites.code_site', 'sites.nom_site',
+        $bons = Bon::join('preneurs', 'bons.preneur_id', '=', 'preneurs.id')
+                     ->select('bons.preneur_id', 'preneurs.n_matricule', 'preneurs.nom',
                         DB::raw('LOWER(bons.type_carburant) as type_carburant'),
                         DB::raw('SUM(bons.quantite) as total_quantite'),
                         DB::raw('SUM(bons.total) as total_valeur'))
-                     ->join('sites', 'bons.site_id', '=', 'sites.id')
                      ->whereBetween('bons.date_bon', [$this->start, $this->end])
-                     ->groupBy('sites.id', 'sites.code_site', 'sites.nom_site', DB::raw('LOWER(bons.type_carburant)'))
-                     ->orderBy('sites.code_site')
+                     ->groupBy('bons.preneur_id', 'preneurs.n_matricule', 'preneurs.nom', DB::raw('LOWER(bons.type_carburant)'))
+                     ->orderBy('preneurs.nom')
                      ->get()
-                     ->groupBy('code_site');
+                     ->groupBy('preneur_id');
 
-        return view('/excel/esite', ['bons' => $bons]);
+        return view('/excel/epreneur',compact('bons'));
     }
 }

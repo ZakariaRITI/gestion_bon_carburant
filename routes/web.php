@@ -23,7 +23,15 @@ Route::get('/impression-site-pdf/{type}', [AdminController::class, 'pdf']);
 Route::get('/impression-bon-pdf', [AdminController::class, 'pdf_recherche_nbon']);
 Route::get('/impression-matricule-pdf', [AdminController::class, 'pdf_recherche_nmatricule']);
 Route::get('/impression-vehicule-pdf', [AdminController::class, 'pdf_recherche_nvehicule']);
+Route::get('/impression-acc-pdf', [AdminController::class, 'pdf_acc']);
 Route::get('/export-excel', [AdminController::class, 'exportExcelBon']);
+Route::get('/export-excel_service', [AdminController::class, 'exportExcelservice']);
+Route::get('/export-excel_vehicule', [AdminController::class, 'exportExcelvehicule']);
+Route::get('/export-excel_preneur', [AdminController::class, 'exportExcelpreneur']);
+Route::get('/export-excel_journee', [AdminController::class, 'exportExceljournee']);
+Route::get('/export-excel_nbon', [AdminController::class, 'exportExcelnbon']);
+Route::get('/export-excel_nmatricule', [AdminController::class, 'exportExcelnmatricule']);
+Route::get('/export-excel_nvehicule', [AdminController::class, 'exportExcelnvehicule']);
 
 Route::get('/', function () {
     return view('welcome');

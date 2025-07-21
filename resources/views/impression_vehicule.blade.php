@@ -19,9 +19,14 @@
         <h4 class="border p-1 d-inline-block">ETAT DE CONSOMMATION DE CARBURANT PAR VEHICULE</h4>
 
         <p class="text-center">Pour la période:&nbsp;  de &nbsp; {{ $start }} &nbsp; à &nbsp; {{$end}} </p> 
-         <a href="/impression-site-pdf/vehicule?start={{ $start }}&end={{ $end }}" target="_blank" class="btn btn-success float-end fw-bold">
+         <a href="/impression-site-pdf/vehicule?start={{ $start }}&end={{ $end }}" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
-       </a> <br> <br>
+       </a>
+
+       <a href="/export-excel_vehicule?start={{ $start }}&end={{ $end }}" class="btn btn-success text-white fw-bold" style="margin-left:800px">
+        Exporter vers Excel
+       </a>
+       <br> <br> <br>
 
         <table class="table table-bordered border-dark">
         <thead class="thead">
