@@ -21,6 +21,7 @@ use App\Exports\JourneeExport;
 use App\Exports\NbonExport;
 use App\Exports\NmatriculeExport;
 use App\Exports\NvehiculeExport;
+use App\Exports\AccExport;
 use PDF;
 
 
@@ -592,6 +593,51 @@ class AdminController extends Controller
     {
         $motcle=$request->motcle;
         return Excel::download(new NvehiculeExport($motcle), 'nvehicule.xlsx');
+    }
+
+    public function exportExcelacc()
+    {
+        return Excel::download(new AccExport(), 'acceuil.xlsx');
+    }
+
+    public function ajoutsite()
+    {
+      return view('ajout_site');
+    }
+
+    public function savesite(Request $request)
+    {
+       $code = ltrim($request->input('codesite'), '0');
+       if ($code === '') 
+       {
+        $code = '0';
+       }
+       $nom=$request->input('nomsite');
+
+      if (Site::where('code_site', $code)->exists()) 
+      {
+      return back()->with('error', 'Ce code site existe déjà.');
+      }
+
+      $site=new Site();
+      $site->code_site=$code;
+      $site->nom_site=$nom;
+      $site->save();
+      return redirect('/as')->with('success', 'Site ajouté avec succès.');
+    }
+
+    public function displaysite()
+    {
+      $site=new Site();
+      $sites=$site->all();
+      return view('display_site', compact('sites'));
+    }
+
+    public function updatesite(Request $request)
+    { 
+      $id=$request->input('id');
+      $site=Site::find($id);
+      return view('update_site', compact('site'));
     }
 
 }  

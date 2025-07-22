@@ -32,6 +32,11 @@ Route::get('/export-excel_journee', [AdminController::class, 'exportExceljournee
 Route::get('/export-excel_nbon', [AdminController::class, 'exportExcelnbon']);
 Route::get('/export-excel_nmatricule', [AdminController::class, 'exportExcelnmatricule']);
 Route::get('/export-excel_nvehicule', [AdminController::class, 'exportExcelnvehicule']);
+Route::get('/export-excel_acc', [AdminController::class, 'exportExcelacc']);
+Route::get('/as',[AdminController::class,'ajoutsite']);
+Route::post('/aa',[AdminController::class,'savesite']);
+Route::get('/ds',[AdminController::class,'displaysite']);
+Route::get('/update',[AdminController::class,'updatesite']);
 
 Route::get('/', function () {
     return view('welcome');

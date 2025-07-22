@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/acceuil.css">
+    <title>Document</title>
     <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/acceuil.css">
 </head>
 <body>
 
-<div id="d1">
     <div id="menu1">
         <ul class="nav flex-column bg-dark p-3">
             <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">----------</a></li>
@@ -78,72 +76,57 @@
         </ul>
     </div>
 
-    <div style="margin-left:200px;">
+
     <div class="container">
-        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="300px">
         <div id="menu">
             @include('menu')
+        </div> <br> <br> <br> <br> <br>
+        <h1 class="h1 fw-bold text-center">AJOUT SITE</h1>
+       
+        @if(session('success'))
+        <div class="alert alert-success w-50 mx-auto">
+            {{ session('success') }}
         </div>
-        
-        <h1 class="h1 fw-bold">Liste de consomation de caburant </h1> <br>
+        @endif
 
-        <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
-            Télécharger / Imprimer PDF
-       </a> 
+        @if(session('error'))
+            <div class="alert alert-danger w-50 mx-auto">
+                {{ session('error') }}
+            </div>
+        @endif
 
-       <a href="/export-excel_acc" class="btn btn-success text-white fw-bold" style="margin-left:800px">
-        Exporter vers Excel
-       </a>
-       <br> <br> <br>
-        <table class="table table-bordered">
-            <thead class="table-primary">
-                <tr>
-                <th>n° Bon</th>
-                <th>type carburant</th>
-                <th>quantite</th>
-                <th>prix</th>
-                <th>total</th>
-                <th>date_bon</th>
-                <th>date_saisis</th>
-                <th>site</th>
-                <th>service</th>
-                <th>n°vehicule</th>
-                <th>nom preneur</th>
-                <th>saisis par</th>
-                <th>modifier</th>
-                <th>supprimer</th>
-                </tr>
-            </thead>
-                <?php
-                $i=0;
-                    foreach($bons as $b){
-                ?>
-            <tbody class="tbody">
-                <tr>
-                    <td><?php echo $b->n_bon ?></td>
-                    <td><?php echo $b->type_carburant ?></td>
-                    <td><?php echo $b->quantite ?></td>
-                    <td><?php echo $b->prix ?></td>
-                    <td><?php echo $b->total ?></td>
-                    <td><?php echo $b->date_bon ?></td>
-                    <td><?php echo $b->date_saisis ?></td>
-                    <td><?php echo $si[$i]->nom_site ?></td>
-                    <td><?php echo $se[$i]->nom_service ?></td>
-                    <td><?php echo $ve[$i]->n_vehicule ?></td>
-                    <td><?php echo $pr[$i]->nom ?></td>
-                    <td><?php echo $ut[$i]->name ?></td>
-                    <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="/delete?id={{$b->id}}" class="btn btn-danger" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');">delete</a></td>
-                </tr>
-            </tbody>
-            <?php 
-                $i++;
-                } 
-            ?>
-        </table>
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                     <form action="/aa" method="post" class="p-4 border rounded shadow" id="form">
+                        @csrf
+                        <div class="mb-3">
+                        <label for="cs" class="form-label">Code site :</label>
+                        <input type="number" id="cs" name="codesite" class="form-control" min="1">
+                        </div>
+                        <div class="mb-3">
+                        <label for="ns" class="form-label">Nom site :</label>
+                        <input type="text" id="ns" name="nomsite" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById("form").addEventListener("submit", function(e) 
+        {
+            code=document.getElementById('cs').value;
+            nom=document.getElementById('ns').value;
+
+            if(code =="" || nom=="")
+                {   
+                e.preventDefault();
+                alert("Veuillez remplir les champs");
+                }
+        });
+    </script>
 </body>
 </html>

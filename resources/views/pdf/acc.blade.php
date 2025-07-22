@@ -59,6 +59,7 @@
                 <th style="width: 9%;">Service</th>
                 <th style="width: 8%;">Véhicule</th>
                 <th style="width: 12%;">Preneur</th>
+                <th>Saisi par</th>
             </tr>
         </thead>
         <tbody>
@@ -76,6 +77,7 @@
                 <td>{{ $se[$i]->nom_service }}</td>
                 <td>{{ $ve[$i]->n_vehicule }}</td>
                 <td>{{ $pr[$i]->nom }}</td>
+                <td>{{ $b->utilisateur->name ?? '' }}</td>
             </tr>
             @php $i++; @endphp
             @endforeach
