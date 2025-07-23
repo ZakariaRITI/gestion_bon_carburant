@@ -37,6 +37,10 @@ Route::get('/as',[AdminController::class,'ajoutsite']);
 Route::post('/aa',[AdminController::class,'savesite']);
 Route::get('/ds',[AdminController::class,'displaysite']);
 Route::get('/update',[AdminController::class,'updatesite']);
+Route::post('/saveupdate',[AdminController::class,'saveupdatesite']);
+Route::get('/delete',[AdminController::class,'deletesite']);
+Route::get('/aservice',[AdminController::class,'ajoutservice']);
+Route::post('/ajservice',[AdminController::class,'saveservice']);
 
 Route::get('/', function () {
     return view('welcome');

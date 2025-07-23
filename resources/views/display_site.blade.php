@@ -83,8 +83,15 @@
         </div> <br> <br> <br> <br>
         <hr>
         <h1 class="h1 fw-bold">Liste des sites</h1> <br>
+
+        @if(session('success'))
+        <div class="alert alert-success w-50 mx-auto">
+            {{ session('success') }}
+        </div>
+        @endif
+
         <table class="table table-bordered border border-3 border-dark">
-            <thead class="thead">
+            <thead class="table-primary">
                 <tr>
                     <th>CODE SITE</th>
                     <th>NOM SITE</th>
@@ -98,7 +105,7 @@
                     <td>{{$site->code_site}}</td>
                     <td>{{$site->nom_site}}</td>
                     <td><a href="/update?id={{$site->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="" class="btn btn-danger">delete</a></td>
+                    <td><a href="/delete?id={{$site->id}}" class="btn btn-danger">delete</a></td>
                 </tr>
             </tbody>
             @endforeach

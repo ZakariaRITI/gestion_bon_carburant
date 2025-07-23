@@ -639,6 +639,60 @@ class AdminController extends Controller
       $site=Site::find($id);
       return view('update_site', compact('site'));
     }
+   
+    public function saveupdatesite(Request $request)
+    {
+      $code=$request->input('codesite');
+      $nom=$request->input('nomsite');
+      $id=$request->input('id');
+
+      $site=Site::find($id);
+
+      $exists = Site::where('code_site', $code)
+                  ->where('id', '!=', $id)
+                  ->exists();
+
+      if ($exists) 
+      {
+        return redirect('/update?id='.$id)->with('error', 'Ce code site est déjà utilisé par un autre site.')->withInput();
+      }
+
+      $site->code_site=$code;
+      $site->nom_site=$nom;
+
+      $site->save();
+      return redirect('/ds')->with('success', 'Site modifier avec succès.');
+    }
+
+    public function deletesite(Request $request)
+    {
+      $id=$request->input('id');
+      $site=Site::find($id);
+      $site->delete();
+      return redirect('/ds')->with('success', 'Site supprimé avec succès.');
+    }
+
+    public function ajoutservice()
+    {
+      return view('ajout_service');
+    }
+
+    public function saveservice(Request $request)
+    {
+       $code =$request->input('codeservice');
+       $nom=$request->input('nomservice');
+
+      if (Service::where('code_service', $code)->exists()) 
+      {
+      return back()->with('error', 'Ce code service existe déjà.');
+      }
+
+      $site=new Service();
+      $site->code_service=$code;
+      $site->nom_service=$nom;
+      $site->save();
+      return redirect('/as')->with('success', 'Service ajouté avec succès.');
+    }
 
 }  
 
