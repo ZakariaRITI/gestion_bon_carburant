@@ -616,7 +616,7 @@ class AdminController extends Controller
 
       if (Site::where('code_site', $code)->exists()) 
       {
-      return back()->with('error', 'Ce code site existe déjà.');
+      return back()->with('error', 'Ce code site existe déjà.')->withInput();
       }
 
       $site=new Site();
@@ -684,16 +684,209 @@ class AdminController extends Controller
 
       if (Service::where('code_service', $code)->exists()) 
       {
-      return back()->with('error', 'Ce code service existe déjà.');
+      return back()->with('error', 'Ce code service existe déjà.')->withInput();
       }
 
       $site=new Service();
       $site->code_service=$code;
       $site->nom_service=$nom;
       $site->save();
-      return redirect('/as')->with('success', 'Service ajouté avec succès.');
+      return redirect('/aservice')->with('success', 'Service ajouté avec succès.');
     }
 
+    public function displayservice()
+    {
+      $service=new Service();
+      $services=$service->all();
+      return view('display_service', compact('services'));
+    }
+
+    public function updateservice(Request $request)
+    { 
+      $id=$request->input('id');
+      $service=Service::find($id);
+      return view('update_service', compact('service'));
+    }
+
+    public function saveupdateservice(Request $request)
+    {
+      $code=$request->input('codeservice');
+      $nom=$request->input('nomservice');
+      $id=$request->input('id');
+
+      $service=Service::find($id);
+
+      $exists = Service::where('code_service', $code)
+                  ->where('id', '!=', $id)
+                  ->exists();
+
+      if ($exists) 
+      {
+        return redirect('/updateservice?id='.$id)->with('error', 'Ce code service est déjà utilisé par un autre service.')->withInput();
+      }
+
+      $service->code_service=$code; 
+      $service->nom_service=$nom;
+
+      $service->save();
+      return redirect('/gservice')->with('success', 'service modifier avec succès.');
+    }
+
+    public function deleteservice(Request $request)
+    {
+      $id=$request->input('id');
+      $service=Service::find($id);
+      $service->delete();
+      return redirect('/gservice')->with('success', 'service supprimé avec succès.');
+    }
+
+    public function ajoutvehicule()
+    {
+      return view('ajout_vehicule');
+    }
+
+    public function savevehicule(Request $request)
+    {
+       $code =$request->input('codevehicule');
+       $marque=$request->input('marque');
+       $modele=$request->input('modele');
+
+      if (Vehicule::where('n_vehicule', $code)->exists()) 
+      {
+      return back()->with('error', 'Ce numero vehicule existe déjà.')->withInput();
+      }
+
+      $vehicule=new Vehicule();
+      $vehicule->n_vehicule=$code;
+      $vehicule->marque=$marque;
+      $vehicule->modele=$modele;
+      $vehicule->save();
+      return redirect('/avehicule')->with('success', 'vehicule ajouté avec succès.');
+    }
+
+    public function displayvehicule()
+    {
+      $vehicule=new Vehicule();
+      $vehicules=$vehicule->all();
+      return view('display_vehicule', compact('vehicules'));
+    }
+
+    public function updatevehicule(Request $request)
+    { 
+      $id=$request->input('id');
+      $vehicule=Vehicule::find($id);
+      return view('update_vehicule', compact('vehicule'));
+    }
+
+    public function saveupdatevehicule(Request $request)
+    {
+      $code=$request->input('codevehicule');
+      $marque=$request->input('marque');
+      $modele=$request->input('modele');
+      $id=$request->input('id');
+
+      $vehicule=Vehicule::find($id);
+
+      $exists = Vehicule::where('n_vehicule', $code)
+                  ->where('id', '!=', $id)
+                  ->exists();
+
+      if ($exists) 
+      {
+        return redirect('/updatevehicule?id='.$id)->with('error', 'Ce numero vehicule est déjà utilisé par un autre vehicule.')->withInput();
+      }
+
+      $vehicule->n_vehicule=$code; 
+      $vehicule->marque=$marque;
+      $vehicule->modele=$modele;
+
+      $vehicule->save();
+      return redirect('/gvehicule')->with('success', 'vehicule modifier avec succès.');
+    }
+
+    public function deletevehicule(Request $request)
+    {
+      $id=$request->input('id');
+      $vehicule=Vehicule::find($id);
+      $vehicule->delete();
+      return redirect('/gvehicule')->with('success', 'vehicule supprimé avec succès.');
+    }
+
+    public function ajoutpreneur()
+    {
+      return view('ajout_preneur');
+    }
+
+    public function savepreneur(Request $request)
+    {
+       $matricule =$request->input('matricule');
+       $nom=$request->input('nom');
+
+      if (Preneur::where('n_matricule', $matricule)->exists()) 
+      {
+      return back()->with('error', 'Ce matricule preneur existe déjà.')->withInput();
+      }
+
+      $preneur=new Preneur();
+      $preneur->n_matricule=$matricule;
+      $preneur->nom=$nom;
+      
+      $preneur->save();
+      return redirect('/apreneur')->with('success', 'preneur ajouté avec succès.');
+    }
+
+    public function displaypreneur()
+    {
+      $preneur=new Preneur();
+      $preneurs=$preneur->all();
+      return view('display_preneur', compact('preneurs'));
+    }
+
+    public function updatepreneur(Request $request)
+    { 
+      $id=$request->input('id');
+      $preneur=Preneur::find($id);
+      return view('update_preneur', compact('preneur'));
+    }
+
+    public function saveupdatepreneur(Request $request)
+    {
+      $matricule=$request->input('matricule');
+      $nom=$request->input('nom');
+      
+      $id=$request->input('id');
+
+      $preneur=Preneur::find($id);
+
+      $exists = Preneur::where('n_matricule', $matricule)
+                  ->where('id', '!=', $id)
+                  ->exists();
+
+      if ($exists) 
+      {
+        return redirect('/updatepreneur?id='.$id)->with('error', 'Ce matricule preneur est déjà utilisé par un autre preneur.')->withInput();
+      }
+
+      $preneur->n_matricule=$matricule; 
+      $preneur->nom=$nom;
+
+      $preneur->save();
+      return redirect('/gpreneur')->with('success', 'preneur modifier avec succès.');
+    }
+
+    public function deletepreneur(Request $request)
+    {
+      $id=$request->input('id');
+      $preneur=Preneur::find($id);
+      $preneur->delete();
+      return redirect('/gpreneur')->with('success', 'preneur supprimé avec succès.');
+    }
+
+    public function support()
+    {
+      return view('support');
+    }
+    
 }  
 
 

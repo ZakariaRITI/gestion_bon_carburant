@@ -41,6 +41,27 @@ Route::post('/saveupdate',[AdminController::class,'saveupdatesite']);
 Route::get('/delete',[AdminController::class,'deletesite']);
 Route::get('/aservice',[AdminController::class,'ajoutservice']);
 Route::post('/ajservice',[AdminController::class,'saveservice']);
+Route::get('/gservice',[AdminController::class,'displayservice']);
+Route::get('/updateservice',[AdminController::class,'updateservice']);
+Route::post('/saveupdateservice',[AdminController::class,'saveupdateservice']);
+Route::get('/delete',[AdminController::class,'deletesite']);
+Route::get('/deleteservice',[AdminController::class,'deleteservice']);
+
+Route::get('/avehicule',[AdminController::class,'ajoutvehicule']);
+Route::post('/ajvehicule',[AdminController::class,'savevehicule']);
+Route::get('/gvehicule',[AdminController::class,'displayvehicule']);
+Route::get('/updatevehicule',[AdminController::class,'updatevehicule']);
+Route::post('/saveupdatevehicule',[AdminController::class,'saveupdatevehicule']);
+Route::get('/deletevehicule',[AdminController::class,'deletevehicule']);
+
+Route::get('/apreneur',[AdminController::class,'ajoutpreneur']);
+Route::post('/ajpreneur',[AdminController::class,'savepreneur']);
+Route::get('/gpreneur',[AdminController::class,'displaypreneur']);
+Route::get('/updatepreneur',[AdminController::class,'updatepreneur']);
+Route::post('/saveupdatepreneur',[AdminController::class,'saveupdatepreneur']);
+Route::get('/deletepreneur',[AdminController::class,'deletepreneur']);
+
+Route::get('/support',[AdminController::class,'support']);
 
 Route::get('/', function () {
     return view('welcome');

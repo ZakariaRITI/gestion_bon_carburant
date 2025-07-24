@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display site</title>
+    <title>Display service</title>
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/acceuil.css">
 </head>
@@ -19,7 +19,7 @@
             @include('menu')
         </div> <br> <br> <br> <br>
         <hr>
-        <h1 class="h1 fw-bold">Liste des sites</h1> <br>
+        <h1 class="h1 fw-bold">Liste des services</h1> <br>
 
         @if(session('success'))
         <div class="alert alert-success w-50 mx-auto">
@@ -30,19 +30,19 @@
         <table class="table table-bordered border border-3 border-dark">
             <thead class="table-primary">
                 <tr>
-                    <th>CODE SITE</th>
-                    <th>NOM SITE</th>
+                    <th>CODE SERVICE</th>
+                    <th>NOM SERVICE</th>
                     <th>MODIFIER</th>
                     <th>SUPPRIMER</th>
                 </tr>
             </thead>
-            @foreach($sites as $site)
+            @foreach($services as $service)
             <tbody class="tbody">
                 <tr>
-                    <td>{{$site->code_site}}</td>
-                    <td>{{$site->nom_site}}</td>
-                    <td><a href="/update?id={{$site->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="/delete?id={{$site->id}}" class="btn btn-danger">delete</a></td>
+                    <td>{{$service->code_service}}</td>
+                    <td>{{$service->nom_service}}</td>
+                    <td><a href="/updateservice?id={{$service->id}}" class="btn btn-warning">update</a></td>
+                    <td><a href="/deleteservice?id={{$service->id}}" class="btn btn-danger">delete</a></td>
                 </tr>
             </tbody>
             @endforeach
