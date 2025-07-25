@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Exports\BonsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,7 @@ Route::get('/updatepreneur',[AdminController::class,'updatepreneur']);
 Route::post('/saveupdatepreneur',[AdminController::class,'saveupdatepreneur']);
 Route::get('/deletepreneur',[AdminController::class,'deletepreneur']);
 
+Route::get('/auser',[AdminController::class,'ajoutuser']);
 Route::get('/support',[AdminController::class,'support']);
 
 Route::get('/', function () {

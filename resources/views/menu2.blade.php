@@ -54,7 +54,7 @@
                 Utilisateur
                 </a>
                  <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Utilisateur</a></li>
+                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/auser" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Utilisateur</a></li>
                     <li><a class="dropdown-item text-dark fw-bold bg-light" href="#" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Utilisateur</a></li>
                 </ul>
             </li>

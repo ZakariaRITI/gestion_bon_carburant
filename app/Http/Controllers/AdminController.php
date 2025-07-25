@@ -882,6 +882,11 @@ class AdminController extends Controller
       return redirect('/gpreneur')->with('success', 'preneur supprimé avec succès.');
     }
 
+    public function ajoutuser()
+    {
+      return view('ajout_utilisateur');
+    }
+
     public function support()
     {
       return view('support');
