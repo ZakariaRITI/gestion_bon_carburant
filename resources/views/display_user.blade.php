@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Display site</title>
+    <title>Display user</title>
     <link rel="stylesheet" href="/css/menu.css">
     <link rel="stylesheet" href="/css/acceuil.css">
 </head>
@@ -19,7 +19,7 @@
             @include('menu')
         </div> <br> <br> <br> <br>
         <hr>
-        <h1 class="h1 fw-bold">Liste des sites</h1> <br>
+        <h1 class="h1 fw-bold">Liste des utilisateurs</h1> <br>
 
         @if(session('success'))
         <div class="alert alert-success w-50 mx-auto">
@@ -30,19 +30,23 @@
         <table class="table table-bordered border border-3 border-dark">
             <thead class="table-primary">
                 <tr>
-                    <th>CODE SITE</th>
-                    <th>NOM SITE</th>
+                    <th>NAME USER</th>
+                    <th>EMAIL</th>
+                    <th>PASSWORD</th>
+                    <th>TYPE</th>
                     <th>MODIFIER</th>
                     <th>SUPPRIMER</th>
                 </tr>
             </thead>
-            @foreach($sites as $site)
+            @foreach($users as $user)
             <tbody class="tbody">
                 <tr>
-                    <td>{{$site->code_site}}</td>
-                    <td>{{$site->nom_site}}</td>
-                    <td><a href="/updatesite?id={{$site->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="/deletesite?id={{$site->id}}" class="btn btn-danger">delete</a></td>
+                    <td>{{$user->name}}</td>
+                    <td>{{$user->email}}</td>
+                    <td>****************</td>
+                    <td>{{$user->type}}</td>
+                    <td><a href="/updateuser?id={{$user->id}}" class="btn btn-warning">update</a></td>
+                    <td><a href="/deleteuser?id={{$user->id}}" class="btn btn-danger">delete</a></td>
                 </tr>
             </tbody>
             @endforeach

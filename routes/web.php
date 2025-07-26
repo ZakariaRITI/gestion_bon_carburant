@@ -34,18 +34,19 @@ Route::get('/export-excel_nbon', [AdminController::class, 'exportExcelnbon']);
 Route::get('/export-excel_nmatricule', [AdminController::class, 'exportExcelnmatricule']);
 Route::get('/export-excel_nvehicule', [AdminController::class, 'exportExcelnvehicule']);
 Route::get('/export-excel_acc', [AdminController::class, 'exportExcelacc']);
+
 Route::get('/as',[AdminController::class,'ajoutsite']);
 Route::post('/aa',[AdminController::class,'savesite']);
 Route::get('/ds',[AdminController::class,'displaysite']);
-Route::get('/update',[AdminController::class,'updatesite']);
+Route::get('/updatesite',[AdminController::class,'updatesite']);
 Route::post('/saveupdate',[AdminController::class,'saveupdatesite']);
-Route::get('/delete',[AdminController::class,'deletesite']);
+Route::get('/deletesite',[AdminController::class,'deletesite']);
+
 Route::get('/aservice',[AdminController::class,'ajoutservice']);
 Route::post('/ajservice',[AdminController::class,'saveservice']);
 Route::get('/gservice',[AdminController::class,'displayservice']);
 Route::get('/updateservice',[AdminController::class,'updateservice']);
 Route::post('/saveupdateservice',[AdminController::class,'saveupdateservice']);
-Route::get('/delete',[AdminController::class,'deletesite']);
 Route::get('/deleteservice',[AdminController::class,'deleteservice']);
 
 Route::get('/avehicule',[AdminController::class,'ajoutvehicule']);
@@ -63,6 +64,12 @@ Route::post('/saveupdatepreneur',[AdminController::class,'saveupdatepreneur']);
 Route::get('/deletepreneur',[AdminController::class,'deletepreneur']);
 
 Route::get('/auser',[AdminController::class,'ajoutuser']);
+Route::post('/ajuser',[AdminController::class,'saveuser']);
+Route::get('/guser',[AdminController::class,'displayuser']);
+Route::get('/updateuser',[AdminController::class,'updateuser']);
+Route::post('/saveupdateuser',[AdminController::class,'saveupdateuser']);
+Route::get('/deleteuser',[AdminController::class,'deleteuser']);
+
 Route::get('/support',[AdminController::class,'support']);
 
 Route::get('/', function () {

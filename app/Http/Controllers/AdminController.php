@@ -22,6 +22,7 @@ use App\Exports\NbonExport;
 use App\Exports\NmatriculeExport;
 use App\Exports\NvehiculeExport;
 use App\Exports\AccExport;
+use Illuminate\Support\Facades\Hash;
 use PDF;
 
 
@@ -886,12 +887,87 @@ class AdminController extends Controller
     {
       return view('ajout_utilisateur');
     }
+    
+    public function saveuser(Request $request)
+    {
+       $nom =$request->input('nom');
+       $email=$request->input('user_email');
+       $password=$request->input('user_password');
+       $type=$request->input('type');
+
+      if (User::where('email', $email)->exists()) 
+      {
+      return back()->with('error', 'Email existe déjà.')->withInput();
+      }
+
+      $user=new User();
+      $user->name=$nom;
+      $user->email=$email;
+      $user->password=$password;
+      $user->type=$type;
+      
+      $user->save();
+      return redirect('/auser')->with('success', 'user ajouté avec succès.');
+    }
+
+    public function displayuser()
+    {
+      $user=new User();
+      $users=$user->all();
+      return view('display_user', compact('users'));
+    }
+
+    public function updateuser(Request $request)
+    { 
+      $id=$request->input('id');
+      $user=User::find($id);
+      return view('update_user', compact('user'));
+    }
+
+    public function saveupdateuser(Request $request)
+    {
+      $nom=$request->input('user_nom');
+      $email=$request->input('user_email');
+      $pwd=$request->input('pwd');
+      $type=$request->input('type');
+      
+      $id=$request->input('id');
+
+      $user=User::find($id);
+
+      $exists = User::where('email', $email)
+                  ->where('id', '!=', $id)
+                  ->exists();
+
+      if ($exists) 
+      {
+        return redirect('/updateuser?id='.$id)->with('error', 'Email est déjà utilisé par un autre utilisateur.')->withInput();
+      }
+
+      $user->name=$nom; 
+      $user->email=$email;
+      $user->type=$type;
+      if (!Hash::check($pwd, $user->password)) 
+      {
+        $user->password = Hash::make($pwd);
+      }
+
+      $user->save();
+      return redirect('/guser')->with('success', 'user modifier avec succès.');
+    }
+
+    public function deleteuser(Request $request)
+    {
+      $id=$request->input('id');
+      $user=User::find($id);
+      $user->delete();
+      return redirect('/guser')->with('success', 'user supprimé avec succès.');
+    }
 
     public function support()
     {
       return view('support');
     }
-    
 }  
 
 
