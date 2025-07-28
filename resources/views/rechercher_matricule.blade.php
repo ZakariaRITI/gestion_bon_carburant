@@ -44,8 +44,10 @@
                 <th>n°vehicule</th>
                 <th>nom preneur</th>
                 <th>saisis par</th>
+                 @if(auth()->user()->type !== 'user')
                 <th>modifier</th>
                 <th>supprimer</th>
+                @endif
                 </tr>
             </thead>
                 <?php
@@ -65,8 +67,10 @@
                     <td><?php echo $b->vehicule->n_vehicule ?></td>
                     <td><?php echo $b->preneur->nom ?></td>
                     <td><?php echo $b->utilisateur->name ?></td>
-                    <td><a href="" class="btn btn-warning">update</a></td>
-                    <td><a href="" class="btn btn-danger">delete</a></td>
+                     @if(auth()->user()->type !== 'user')
+                    <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
+                    <td><a href="/delete?id={{$b->id}}" class="btn btn-danger">delete</a></td>
+                    @endif
                 </tr>
             </tbody>
             <?php 

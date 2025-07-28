@@ -11,9 +11,15 @@
 <body>
 
     <div id="d1">
+        @if(auth()->user()->type !== 'user')
         <div id="menu1">
         @include('menu2')
         </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
     </div>
 
     <div style="margin-left:200px;">
@@ -48,8 +54,10 @@
                 <th>n°vehicule</th>
                 <th>nom preneur</th>
                 <th>saisis par</th>
+                @if(auth()->user()->type !== 'user')
                 <th>modifier</th>
                 <th>supprimer</th>
+                @endif
                 </tr>
             </thead>
                 <?php
@@ -70,8 +78,10 @@
                     <td><?php echo $ve[$i]->n_vehicule ?></td>
                     <td><?php echo $pr[$i]->nom ?></td>
                     <td><?php echo $ut[$i]->name ?></td>
+                    @if(auth()->user()->type !== 'user')
                     <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
                     <td><a href="/delete?id={{$b->id}}" class="btn btn-danger" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');">delete</a></td>
+                    @endif
                 </tr>
             </tbody>
             <?php 

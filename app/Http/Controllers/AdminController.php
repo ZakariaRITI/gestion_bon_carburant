@@ -935,9 +935,7 @@ class AdminController extends Controller
 
       $user=User::find($id);
 
-      $exists = User::where('email', $email)
-                  ->where('id', '!=', $id)
-                  ->exists();
+      $exists = User::where('email', $email)->where('id', '!=', $id)->exists();
 
       if ($exists) 
       {
@@ -968,6 +966,29 @@ class AdminController extends Controller
     {
       return view('support');
     }
+
+    public function dashbord()
+    {
+    // Récupère la somme du champ 'total' groupée par 'type_carburant'
+    $sommeParCarburant = DB::table('bons')
+        ->select('type_carburant', DB::raw('SUM(total) as somme_total'))
+        ->whereIn('type_carburant', ['essence', 'diesel'])
+        ->groupBy('type_carburant')
+        ->get();
+
+    // Optionnel : convertir en tableau clé => valeur pour faciliter l'utilisation en vue
+    $result = [
+        'essence' => 0,
+        'diesel' => 0,
+    ];
+
+    foreach ($sommeParCarburant as $item) {
+        $result[$item->type_carburant] = $item->somme_total;
+    }
+
+    return view('dashbord', compact('result'));
+    }
+
 }  
 
 

@@ -61,7 +61,7 @@
             nom=document.getElementById('cs').value;
             email=document.getElementById('ns').value;
             pwd=document.getElementById('p').value;
-            type=document.getElementById('t').value;
+            type=document.getElementById('type').value;
 
             if(nom =="" || email=="" || pwd=="" || type="")
                 {   

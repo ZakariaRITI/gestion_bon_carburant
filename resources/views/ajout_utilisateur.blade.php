@@ -48,7 +48,7 @@
                         </div>
                         <div class="mb-3">
                         <label for="pwd" class="form-label">Password :</label>
-                        <input type="password" id="pwd" name="user_password" class="form-control" value="{{ old('password') }}">
+                        <input type="password" id="pwd" name="user_password" class="form-control">
                         </div>
                         <div class="mb-3">
                         <label for="type" class="form-label">Type :</label>

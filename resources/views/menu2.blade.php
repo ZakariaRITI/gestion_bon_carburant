@@ -12,7 +12,7 @@
         </ul>
         <img src="/img/logo2.jpg" alt="" height="150px" width="200px">
         <ul class="nav flex-column bg-dark p-3">
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
+            <li class="nav-item"><a href="/dashbord" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
             <li class="nav-item dropdown">
                 <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Site

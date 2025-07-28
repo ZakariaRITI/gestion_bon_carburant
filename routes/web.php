@@ -70,6 +70,7 @@ Route::get('/updateuser',[AdminController::class,'updateuser']);
 Route::post('/saveupdateuser',[AdminController::class,'saveupdateuser']);
 Route::get('/deleteuser',[AdminController::class,'deleteuser']);
 
+Route::get('/dashbord',[AdminController::class,'dashbord']);
 Route::get('/support',[AdminController::class,'support']);
 
 Route::get('/', function () {
