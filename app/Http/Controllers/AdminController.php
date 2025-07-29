@@ -969,24 +969,26 @@ class AdminController extends Controller
 
     public function dashbord()
     {
-    // Récupère la somme du champ 'total' groupée par 'type_carburant'
-    $sommeParCarburant = DB::table('bons')
-        ->select('type_carburant', DB::raw('SUM(total) as somme_total'))
-        ->whereIn('type_carburant', ['essence', 'diesel'])
-        ->groupBy('type_carburant')
-        ->get();
+      $sites=Site::count();
+      $services=Service::count();
+      $vehicules=Vehicule::count();
+      $preneurs=Preneur::count();
+      $users=User::count();
+      $bons=Bon::count();
 
-    // Optionnel : convertir en tableau clé => valeur pour faciliter l'utilisation en vue
-    $result = [
-        'essence' => 0,
-        'diesel' => 0,
-    ];
+      $vehi1=Vehicule::select('marque',DB::raw('count(*) as total'))->groupBy('marque')->get();
+      $carburant = Bon::select(DB::raw('LOWER(type_carburant) as carburant'), DB::raw('SUM(total) as somme_total'))
+      ->groupBy(DB::raw('LOWER(type_carburant)'))
+      ->get();
+      $bonsParAnnee = Bon::select(
+        DB::raw('YEAR(date_bon) as annee'),
+        DB::raw('COUNT(*) as total')
+    )
+    ->groupBy('annee')
+    ->orderBy('annee')
+    ->get();
 
-    foreach ($sommeParCarburant as $item) {
-        $result[$item->type_carburant] = $item->somme_total;
-    }
-
-    return view('dashbord', compact('result'));
+      return view('dashbord',compact('sites','services','vehicules','preneurs','users','bons','vehi1','carburant','bonsParAnnee'));
     }
 
 }  
