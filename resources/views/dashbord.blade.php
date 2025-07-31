@@ -4,38 +4,118 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="/css/acceuil.css">
   <link rel="stylesheet" href="/css/menu.css">
-
   <style>
-    body {
-      background-color: #f8f9fa;
+    body 
+    {
+      margin: 0;
+      padding: 0;
       overflow-x: hidden;
-      overflow-y: hidden; /* plus de scroll vertical */
     }
-    .main-content {
-      margin-left: 220px;
-      padding: 30px 20px 10px; /* réduit le padding-top */
+    
+    .dashboard-container 
+    {
+      padding-top: 100px; /* espace sous le menu du haut */
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-left: 200px; /* largeur du menu latéral */
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
     }
-    .card-stat {
-      min-height: 80px; /* réduit la hauteur des cards */
+
+    .card-custom 
+    {
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(148, 163, 184, 0.25);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 90px;
     }
-    .chart-container {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.05);
-      height: 250px;       /* réduit la hauteur des 2 premiers graphiques */
+    
+    .card-custom:hover 
+    {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(148, 163, 184, 0.35);
     }
-    .chart-container.small {
-      height: 200px;       /* réduit la hauteur du 3ème graphique */
+    
+    .card-icon 
+    {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: white;
+      margin-bottom: 8px;
     }
-    canvas {
-      width: 100% !important;
-      height: 100% !important;
+    
+    .icon-sites { background: linear-gradient(45deg, #1f2937, #3b82f6); }       /* bleu foncé vers bleu vif */
+    .icon-services { background: linear-gradient(45deg, #065f46, #10b981); }    /* vert foncé vers vert vif */
+    .icon-vehicules { background: linear-gradient(45deg, #374151, #6366f1); }   /* gris foncé vers bleu pastel */
+    .icon-preneurs { background: linear-gradient(45deg, #854d0e, #f59e0b); }   /* brun foncé vers jaune orangé */
+    .icon-users { background: linear-gradient(45deg, #b91c1c, #ef4444); }      /* rouge bordeaux vers rouge vif */
+    .icon-bons { background: linear-gradient(45deg, #5b21b6, #8b5cf6); }       /* violet foncé vers violet clair */
+
+    .chart-container 
+    {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 10px;
+      box-shadow: 0 4px 20px rgba(148, 163, 184, 0.15);
+      border: 1px solid rgba(226, 232, 240, 0.6);
+      margin-bottom: 10px;
+    }
+    
+    .chart-container-small 
+    {
+      height: 200px;
+    }
+    
+    .chart-container-large 
+    {
+      height: 180px;
+    }
+    
+    .chart-title 
+    {
+      color: #1e293b;
+      font-weight: 600;
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    
+    .card-number 
+    {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #1e293b;
+      margin: 0;
+    }
+    
+    .card-label 
+    {
+      color: #64748b;
+      font-size: 0.8rem;
+      margin: 0;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) 
+    {
+      .dashboard-container 
+      {
+        margin-left: 0;
+        margin-top: 60px;
+      }
     }
   </style>
 </head>
@@ -43,179 +123,254 @@
 <body>
   <div id="menu1">@include('menu2')</div>
   <div id="menu">@include('menu')</div>
-
-  <div class="main-content">
-    <!-- Cards -->
-    <div class="row mb-3" style="margin-top:80px">
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Sites</h6>
-            <p class="card-text fs-5 mb-0">{{ $sites }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Services</h6>
-            <p class="card-text fs-5 mb-0">{{ $services }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Véhicules</h6>
-            <p class="card-text fs-5 mb-0">{{ $vehicules }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Preneurs</h6>
-            <p class="card-text fs-5 mb-0">{{ $preneurs }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Utilisateurs</h6>
-            <p class="card-text fs-5 mb-0">{{ $users }}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2">
-        <div class="card text-dark bg-light card-stat">
-          <div class="card-body text-center py-2">
-            <h6 class="card-title mb-1">Bons</h6>
-            <p class="card-text fs-5 mb-0">{{ $bons }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Charts -->
+  
+  <div class="dashboard-container">
+    
     <div class="row mb-3">
-      <div class="col-md-6">
-        <div class="chart-container">
-          <canvas id="chart3"></canvas>
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-sites">🏢</div>
+            <h3 class="card-number">{{ $sites }}</h3>
+            <p class="card-label">Sites</p>
+          </div>
         </div>
       </div>
-      <div class="col-md-6">
-        <div class="chart-container">
-          <canvas id="chart2"></canvas>
+      
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-services">⚙️</div>
+            <h3 class="card-number">{{ $services }}</h3>
+            <p class="card-label">Services</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-vehicules">🚗</div>
+            <h3 class="card-number">{{ $vehicules }}</h3>
+            <p class="card-label">Véhicules</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-preneurs">👥</div>
+            <h3 class="card-number">{{ $preneurs }}</h3>
+            <p class="card-label">Preneurs</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-users">👤</div>
+            <h3 class="card-number">{{ $users }}</h3>
+            <p class="card-label">Utilisateurs</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-2 mb-2">
+        <div class="card card-custom text-center">
+          <div class="card-body d-flex flex-column justify-content-center align-items-center">
+            <div class="card-icon icon-bons">📋</div>
+            <h3 class="card-number">{{ $bons }}</h3>
+            <p class="card-label">Bons</p>
+          </div>
         </div>
       </div>
     </div>
-
+    
+    <!-- Charts Section -->
+    <div class="row mb-2">
+      <div class="col-md-6">
+        <div class="chart-container chart-container-small">
+          <h4 class="chart-title">Montant total dépensé par type de carburant (DH)</h4>
+          <canvas id="carburantChart"></canvas>
+        </div>
+    </div>
+      
+      <div class="col-md-6">
+        <div class="chart-container chart-container-small">
+          <h4 class="chart-title">Top 5 Véhicules Consommateurs (Litres)</h4>
+          <canvas id="vehiculesChart"></canvas>
+        </div>
+      </div>
+    </div>
+    
     <div class="row">
-      <div class="col-md-12">
-        <div class="chart-container small">
-          <canvas id="chart1"></canvas>
+      <div class="col-12">
+        <div class="chart-container chart-container-large">
+          <h4 class="chart-title">Coûts mensuels de carburant (DH)</h4>
+          <canvas id="consoChart"></canvas>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Chart 1: Véhicules par marque (large en bas)
-    new Chart(document.getElementById('chart1'), {
-      type: 'bar',
-      data: {
-        labels: {!! json_encode($vehi1->pluck('marque')) !!},
-        datasets: [{ 
-          // label retiré pour éviter redondance avec title
-          data: {!! json_encode($vehi1->pluck('total')) !!},
-          backgroundColor: ['#2C3E50','#18BC9C','#3498DB','#9B59B6','#E67E22','#95A5A6','#34495E']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: { y: { beginAtZero: true } },
-        plugins: { 
-          legend: { display: false },
-          title: {
-            display: true,
-            text: 'Nombre de véhicules par marque',
-            font: { size: 18 },
-            padding: { bottom: 10 }
-          }
-        }
-      }
-    });
+    // Configuration des couleurs
+    const colors = {
+      primary: ['#1f2937', '#3b82f6', '#065f46', '#10b981',  '#5b21b6', '#8b5cf6' ]
+    };
 
-    // Chart 2: Répartition des carburants (milieu à droite)
-    new Chart(document.getElementById('chart2'), {
+    // 1. Graphique en secteurs (Pie) - Répartition par carburant (DH)
+    const carburantData = @json($carburant);
+    const carburantLabels = carburantData.map(item => item.carburant.toUpperCase());
+    const carburantValues = carburantData.map(item => parseFloat(item.total_litres));
+
+    const ctxCarburant = document.getElementById('carburantChart').getContext('2d');
+    new Chart(ctxCarburant, {
       type: 'pie',
       data: {
-        labels: {!! json_encode($carburant->pluck('carburant')) !!},
+        labels: carburantLabels,
         datasets: [{
-          // label retiré pour éviter redondance avec title
-          data: {!! json_encode($carburant->pluck('somme_total')) !!},
-          backgroundColor: [
-            '#4e73df', // Bleu
-            '#1cc88a', // Vert
-            '#36b9cc', // Cyan
-            '#f6c23e', // Jaune
-            '#e74a3b', // Rouge
-            '#858796'  // Gris
-          ]
+          data: carburantValues,
+          backgroundColor: colors.primary,
+          borderWidth: 2,
+          borderColor: '#fff'
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom' },
-          title: {
-            display: true,
-            text: 'Répartition des carburants (somme totale)',
-            font: { size: 18 },
-            padding: { top: 10, bottom: 10 }
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.label || '';
+                let value = context.parsed || 0;
+                return label + ': ' + value.toLocaleString('fr-FR') + ' DH';
+              }
+            }
           }
         }
       }
     });
 
-    // Chart 3 : Nombre de bons par année (ligne)
-new Chart(document.getElementById('chart3'), {
-  type: 'line',  // <-- ici on change 'bar' en 'line'
-  data: {
-    labels: {!! json_encode($bonsParAnnee->pluck('annee')) !!},
-    datasets: [{
-      // label retiré pour éviter redondance avec title
-      data: {!! json_encode($bonsParAnnee->pluck('total')) !!},
-      backgroundColor: 'rgba(78, 115, 223, 0.2)', // bleu clair transparent pour remplissage
-      borderColor: '#4e73df', // bleu plus foncé pour ligne
-      borderWidth: 2,
-      fill: true,
-      tension: 0.3, // courbure de la ligne, 0 = droite, plus grand = plus arrondi
-      pointRadius: 4,
-      pointBackgroundColor: '#4e73df'
-    }]
-  },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      y: { beginAtZero: true, ticks: { stepSize: 1 } }
-    },
-    plugins: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Nombre de bons par année',
-        font: { size: 18 },
-        padding: { bottom: 10 }
-      }
-    }
-  }
-});
+    // 2. Graphique en anneau (Doughnut) - Top 5 véhicules (Litres)
+    const vehiculesData = @json($vehiculesTop);
+    const vehiculesLabels = vehiculesData.map(item => 
+    item.vehicule ? `${item.vehicule.marque} ${item.vehicule.modele}` : `Véhicule ${item.vehicule_id}`);
+    const vehiculesValues = vehiculesData.map(item => parseFloat(item.total_litres));
 
+    const ctxVehicules = document.getElementById('vehiculesChart').getContext('2d');
+    new Chart(ctxVehicules, {
+      type: 'doughnut',
+      data: {
+        labels: vehiculesLabels,
+        datasets: [{
+          data: vehiculesValues,
+          backgroundColor: colors.primary,
+          borderWidth: 3,
+          borderColor: '#fff'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              padding: 15,
+              usePointStyle: true
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let label = context.label || '';
+                let value = context.parsed || 0;
+                return label + ': ' + value.toLocaleString('fr-FR') + ' litres';
+              }
+            }
+          }
+        }
+      }
+    });
+
+    // 3. Graphique en barres - Consommation mensuelle (DH)
+    const consoData = @json($consoMensuelle);
+    const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'];
+    
+    // Créer un tableau de 12 mois avec des valeurs par défaut
+    const consoLabels = months;
+    const consoValues = new Array(12).fill(0);
+    
+    // Remplir avec les données réelles
+    consoData.forEach(item => {
+      const monthIndex = parseInt(item.mois) - 1;
+      if (monthIndex >= 0 && monthIndex < 12) {
+        consoValues[monthIndex] = parseFloat(item.total_litres);
+      }
+    });
+
+    const ctxConso = document.getElementById('consoChart').getContext('2d');
+    new Chart(ctxConso, {
+      type: 'bar',
+      data: {
+        labels: consoLabels,
+        datasets: [{
+          label: 'Consommation (DH)',
+          data: consoValues,
+          backgroundColor: '#4ecdc4',
+          borderColor: '#44bd87',
+          borderWidth: 2,
+          borderRadius: 8,
+          borderSkipped: false,
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                let value = context.parsed.y || 0;
+                return 'Montant : ' + value.toLocaleString('fr-FR') + ' DH';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0,0,0,0.05)'
+            },
+            ticks: {
+              callback: function(value) {
+                return value + ' DH';
+              }
+            }
+          },
+          x: {
+            grid: {
+              display: false
+            }
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>

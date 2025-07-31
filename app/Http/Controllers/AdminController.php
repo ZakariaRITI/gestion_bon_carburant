@@ -976,19 +976,23 @@ class AdminController extends Controller
       $users=User::count();
       $bons=Bon::count();
 
-      $vehi1=Vehicule::select('marque',DB::raw('count(*) as total'))->groupBy('marque')->get();
-      $carburant = Bon::select(DB::raw('LOWER(type_carburant) as carburant'), DB::raw('SUM(total) as somme_total'))
+      $consoMensuelle = Bon::select(DB::raw('MONTH(date_bon) as mois'),DB::raw('SUM(total) as total_litres'))
+      ->groupBy(DB::raw('MONTH(date_bon)'))
+      ->orderBy(DB::raw('MONTH(date_bon)'))
+      ->get();
+
+      $carburant = Bon::select(DB::raw('LOWER(type_carburant) as carburant'),DB::raw('SUM(total) as total_litres'))
       ->groupBy(DB::raw('LOWER(type_carburant)'))
       ->get();
-      $bonsParAnnee = Bon::select(
-        DB::raw('YEAR(date_bon) as annee'),
-        DB::raw('COUNT(*) as total')
-    )
-    ->groupBy('annee')
-    ->orderBy('annee')
-    ->get();
 
-      return view('dashbord',compact('sites','services','vehicules','preneurs','users','bons','vehi1','carburant','bonsParAnnee'));
+      $vehiculesTop = Bon::select('vehicule_id',DB::raw('SUM(quantite) as total_litres'))
+      ->groupBy('vehicule_id')
+      ->orderByDesc('total_litres')
+      ->limit(5)
+      ->get()
+      ->load('vehicule'); 
+
+      return view('dashbord',compact('sites','services','vehicules','preneurs','users','bons','consoMensuelle','carburant','vehiculesTop'));
     }
 
 }  
