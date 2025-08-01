@@ -598,7 +598,7 @@ class AdminController extends Controller
 
     public function exportExcelacc()
     {
-        return Excel::download(new AccExport(), 'acceuil.xlsx');
+        return Excel::download(new AccExport(), 'liste_complet.xlsx');
     }
 
     public function ajoutsite()
@@ -975,7 +975,7 @@ class AdminController extends Controller
       $preneurs=Preneur::count();
       $users=User::count();
       $bons=Bon::count();
-
+                          
       $consoMensuelle = Bon::select(DB::raw('MONTH(date_bon) as mois'),DB::raw('SUM(total) as total_litres'))
       ->groupBy(DB::raw('MONTH(date_bon)'))
       ->orderBy(DB::raw('MONTH(date_bon)'))

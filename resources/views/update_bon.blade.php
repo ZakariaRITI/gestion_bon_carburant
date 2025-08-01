@@ -7,10 +7,21 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">    
 </head>
 <body>
+        <div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
+    <div class="container">
         <div id="menu">
             @include('menu')
-        </div> <br> <br> <br>
-    <div class="container">
+        </div> 
         <h1 class="h3 my-4 text-center text-dark fw-bold">Modifier un Bon de carburant</h1>
         <div class="card shadow-sm p-4 bg-light border-0 rounded-3">
         <form action="/modifier" method="post" class="form col-md-6 mx-auto" id="form">

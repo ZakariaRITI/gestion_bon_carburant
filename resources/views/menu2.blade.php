@@ -1,76 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menu2</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu2</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- CSS personnalisé -->
 </head>
 <body>
-    <div id="menu1">
-        <ul class="nav flex-column bg-dark p-3">
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">----------</a></li>
+  <div id="menu1">
+    
+    <img src="/img/logo2.jpg" alt="Logo" height="150" width="200" style="margin-top:50px;"/>
+    <ul class="nav flex-column bg-dark p-3">
+      <li class="nav-item"><a href="/dashbord" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Site
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="siteDropdown">
+          <li><a class="dropdown-item fw-bold" href="/as">Ajouter site</a></li>
+          <li><a class="dropdown-item fw-bold" href="/ds">Gestion site</a></li>
         </ul>
-        <img src="/img/logo2.jpg" alt="" height="150px" width="200px">
-        <ul class="nav flex-column bg-dark p-3">
-            <li class="nav-item"><a href="/dashbord" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
-            <li class="nav-item dropdown">
-                <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Site
-                </a>
-                 <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/as" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter site</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/ds" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion site</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Service
-                </a>
-                 <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/aservice" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter service</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/gservice" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion service</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Vehicule
-                </a>
-                 <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/avehicule" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Vehicule</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/gvehicule" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Vehicule</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Preneur
-                </a>
-                 <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/apreneur" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Preneur</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/gpreneur" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Preneur</a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a href="" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Utilisateur
-                </a>
-                 <ul class="dropdown-menu bg-dark ml-5" aria-labelledby="siteDropdown">
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/auser" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Ajouter Utilisateur</a></li>
-                    <li><a class="dropdown-item text-dark fw-bold bg-light" href="/guser" style="transition: 0.3s;" onmouseover="this.classList.add('bg-dark','text-white');" onmouseout="this.classList.remove('bg-dark','text-white');">Gestion Utilisateur</a></li>
-                </ul>
-            </li>
-            <li class="nav-item"><a href="/support" class="nav-link fs-4 fw-bold text-white">Support & Aide</a></li>
-            <li><hr class="my-2" style="border-top: 1px solid black; width: 100%;"></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
-            <li class="nav-item"><a href="" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Service
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+          <li><a class="dropdown-item fw-bold" href="/aservice">Ajouter service</a></li>
+          <li><a class="dropdown-item fw-bold" href="/gservice">Gestion service</a></li>
         </ul>
-    </div>    
+      </li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="vehiculeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Vehicule
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="vehiculeDropdown">
+          <li><a class="dropdown-item fw-bold" href="/avehicule">Ajouter Vehicule</a></li>
+          <li><a class="dropdown-item fw-bold" href="/gvehicule">Gestion Vehicule</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="preneurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Preneur
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="preneurDropdown">
+          <li><a class="dropdown-item fw-bold" href="/apreneur">Ajouter Preneur</a></li>
+          <li><a class="dropdown-item fw-bold" href="/gpreneur">Gestion Preneur</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="utilisateurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Utilisateur
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="utilisateurDropdown">
+          <li><a class="dropdown-item fw-bold" href="/auser">Ajouter Utilisateur</a></li>
+          <li><a class="dropdown-item fw-bold" href="/guser">Gestion Utilisateur</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item"><a href="/support" class="nav-link fs-4 fw-bold text-white">Support & Aide</a></li>
+
+      <li><hr class="my-2" /></li>
+
+      <!-- Placeholder/support links -->
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">_________</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+      <li class="nav-item"><a href="#" class="nav-link fs-4 fw-bold text-dark">Support</a></li>
+    </ul>
+  </div>
+
+  <!-- Bootstrap Bundle JS (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

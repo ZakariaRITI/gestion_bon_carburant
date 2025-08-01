@@ -7,68 +7,119 @@
     z-index: 1030;
     display: flex;
     align-items: center;
-    padding: 0 1rem;
+    padding: 0 1.5rem; /* un peu plus d'espace horizontal */
+    background-color: #1f2d3d; /* Couleur sombre pro */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3); /* légère ombre sous la navbar */
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Nav links */
+.nav-link {
+    position: relative;
+    background: transparent;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    padding: 0.5rem 1rem;
+    color: #e0e0e0; /* un gris clair, moins agressif que blanc */
+    font-weight: 600;
+}
+
+/* Soulignement fluide */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 5px; /* un peu plus d'espace sous le texte */
+    left: 50%;
+    background-color: #0d6efd; /* bleu bootstrap */
+    transition: all 0.3s ease;
+    border-radius: 1px;
 }
 
 .nav-link:hover {
-  background-color: #0d6efd;
-  color: white !important;
-  border-radius: 0.25rem;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  transition: all 0.3s ease;
-}
-
-.nav-link {
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 50%;
-  background-color: #fff;
-  transition: all 0.3s ease;
+    background: linear-gradient(90deg, #0d6efd 0%, #6610f2 100%);
+    color: white !important;
+    border-radius: 0.25rem;
+    box-shadow: 0 5px 10px rgba(13, 110, 253, 0.4);
+    transform: scale(1.08);
+    z-index: 1050; /* au-dessus des autres éléments */
 }
 
 .nav-link:hover::after {
-  left: 0;
-  width: 100%;
+    left: 0;
+    width: 100%;
 }
 
-.nav-link {
-  background: transparent;
-  transition: background 0.4s ease;
-}
-
-.nav-link:hover {
-  background: linear-gradient(90deg, #0d6efd 0%, #6610f2 100%);
-}
-
-.nav-link:hover {
-  transform: scale(1.05);
-}
-
-.nav-link {
-  font-family: 'Poppins', sans-serif;
-  letter-spacing: 0.5px;
-}
-
+/* Lien actif */
 .nav-link.active {
-  background-color: #0d6efd;
-  color: white !important;
+    background-color: #0d6efd;
+    color: white !important;
+    box-shadow: 0 0 8px #0d6efd;
 }
 
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-}
-
+/* Dropdown */
 .nav-item.dropdown:hover .dropdown-menu {
     display: block;
     margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease;
 }
+
+.dropdown-menu {
+    background-color: #273444; /* bleu sombre un peu plus clair */
+    border: none;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    border-radius: 0.3rem;
+    min-width: 10rem;
+    padding: 0.3rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 1040;
+}
+
+/* Dropdown items */
+.dropdown-item {
+    color: #d1d5db;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #0d6efd;
+    color: #fff;
+    border-radius: 0.25rem;
+}
+
+/* Effet hover pour les boutons */
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+/* Aligne correctement les items de la barre de droite */
+.nav.align-items-center > .nav-item {
+    margin-left: 1rem;
+}
+
+/* Profile image */
+.nav-link img {
+    border-radius: 50%;
+    transition: box-shadow 0.3s ease;
+}
+
+.nav-link img:hover {
+    box-shadow: 0 0 8px #0d6efd;
+}
+
+/* Supprimer la flèche (caret) du dropdown-toggle */
+.nav-link.dropdown-toggle::after {
+    display: none;
+}
+
 

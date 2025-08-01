@@ -6,7 +6,6 @@
     <title>Acceuil</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/acceuil.css">
-    <link rel="stylesheet" href="/css/menu.css">
 </head>
 <body>
 
@@ -24,12 +23,12 @@
 
     <div style="margin-left:200px;">
     <div class="container">
-        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="300px">
+        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="350px">
         <div id="menu">
             @include('menu')
         </div>
         
-        <h1 class="h1 fw-bold">Liste de consomation de caburant </h1> <br>
+        <h1 class="h1 fw-bold ">Liste de consommation de carburant </h1> <br>
 
         <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
