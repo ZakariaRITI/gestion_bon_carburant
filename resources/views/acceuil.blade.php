@@ -23,12 +23,24 @@
 
     <div style="margin-left:200px;">
     <div class="container">
-        <img src="/img/1.jpeg" alt="" class="mx-auto d-block mt-5" width="800px" height="350px">
+        <div class="container" style="margin-top:80px;">
+            <div class="row justify-content-center align-items-center">
+    
+                <div class="col-auto">
+                <img src="/img/ah.jpg" alt="" width="400px" height="200px" class="img-fluid" />
+                </div>
+                <div class="col-auto">
+                <img src="/img/m1.webp" alt="" width="400px" height="150px" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+
+        
         <div id="menu">
             @include('menu')
         </div>
         
-        <h1 class="h1 fw-bold ">Liste de consommation de carburant </h1> <br>
+    <h1 class="h1 fw-semibold text-center mb-4 border border-4  px-3 py-2"> Liste de consommation de carburant</h1>
 
         <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
@@ -38,7 +50,7 @@
         Exporter vers Excel
        </a>
        <br> <br> <br>
-        <table class="table table-bordered">
+        <table class="table table-bordered table-striped">
             <thead class="table-primary">
                 <tr>
                 <th>n° Bon</th>
@@ -59,11 +71,11 @@
                 @endif
                 </tr>
             </thead>
+            <tbody class="tbody">
                 <?php
-                $i=0;
+                    $i=0;
                     foreach($bons as $b){
                 ?>
-            <tbody class="tbody">
                 <tr>
                     <td><?php echo $b->n_bon ?></td>
                     <td><?php echo $b->type_carburant ?></td>
@@ -82,11 +94,11 @@
                     <td><a href="/delete?id={{$b->id}}" class="btn btn-danger" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');">delete</a></td>
                     @endif
                 </tr>
-            </tbody>
-            <?php 
+                <?php 
                 $i++;
                 } 
             ?>
+            </tbody>
         </table>
     </div>
     </div>

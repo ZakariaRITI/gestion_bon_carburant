@@ -1,6 +1,7 @@
 <x-guest-layout>
     <!-- Status de session -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <h1 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">Bienvenue, merci de vous authentifier</h1>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -42,14 +43,16 @@
     </form>
 
   <!-- Bouton fixe bascule mode clair/sombre -->
-    <div class="fixed right-5 z-50" style="top:100px;">
-        <button 
-            onclick="toggleTheme()" 
-            class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition"
-            aria-label="Basculer mode clair/sombre"
-        >
-             Basculer mode d’affichage(clair/sombre)
-        </button>
+    <div class="fixed z-50" style="top:100px; right:200px;">
+    <button 
+    onclick="toggleTheme()" 
+    class="bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-700"
+    aria-label="Basculer mode clair/sombre">
+    <!-- Icône soleil visible en mode clair -->
+    <img src="/img/sun.svg" alt="Mode clair" class="w-6 h-6 block dark:hidden" style="width:40px; height:40px;"/>
+    <!-- Icône lune visible en mode sombre -->
+    <img src="/img/moon.svg" alt="Mode sombre" class="w-6 h-6 hidden dark:block" style="width:40px; height:40px;"/>
+    </button>
     </div>
 
 </x-guest-layout>
