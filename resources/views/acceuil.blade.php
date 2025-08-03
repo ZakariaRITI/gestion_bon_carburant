@@ -25,81 +25,107 @@
     <div class="container">
         <div class="container" style="margin-top:80px;">
             <div class="row justify-content-center align-items-center">
-    
-                <div class="col-auto">
-                <img src="/img/ah.jpg" alt="" width="400px" height="200px" class="img-fluid" />
+                 <div class="col-auto">
+                <img src="/img/11.jpg" alt="" width="400px" height="200px" />
                 </div>
                 <div class="col-auto">
-                <img src="/img/m1.webp" alt="" width="400px" height="150px" class="img-fluid" />
+                <img src="/img/ah.jpg" alt="" width="300px" height="200px" />
+                </div>
+                <div class="col-auto">
+                <img src="/img/m1.webp" alt="" width="300px" height="200px" />
                 </div>
             </div>
         </div>
-
-        
+        <hr class="border-4">
         <div id="menu">
             @include('menu')
         </div>
         
-    <h1 class="h1 fw-semibold text-center mb-4 border border-4  px-3 py-2"> Liste de consommation de carburant</h1>
+        <h1 class="text-center display-5 fw-bold py-3 px-2 bg-light border-top border-bottom border-2 shadow-sm mt-3 mb-4">
+            Liste de consommation de carburant
+        </h1>
 
         <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
-       </a> 
+        </a> 
 
-       <a href="/export-excel_acc" class="btn btn-success text-white fw-bold" style="margin-left:800px">
+       <a href="/export-excel_acc" class="btn btn-success text-white fw-bold" style="margin-left:850px">
         Exporter vers Excel
        </a>
-       <br> <br> <br>
-        <table class="table table-bordered table-striped">
-            <thead class="table-primary">
-                <tr>
-                <th>n° Bon</th>
-                <th>type carburant</th>
-                <th>quantite</th>
-                <th>prix</th>
-                <th>total</th>
-                <th>date_bon</th>
-                <th>date_saisis</th>
-                <th>site</th>
-                <th>service</th>
-                <th>n°vehicule</th>
-                <th>nom preneur</th>
-                <th>saisis par</th>
-                @if(auth()->user()->type !== 'user')
-                <th>modifier</th>
-                <th>supprimer</th>
-                @endif
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                <?php
-                    $i=0;
-                    foreach($bons as $b){
-                ?>
-                <tr>
-                    <td><?php echo $b->n_bon ?></td>
-                    <td><?php echo $b->type_carburant ?></td>
-                    <td><?php echo $b->quantite ?></td>
-                    <td><?php echo $b->prix ?></td>
-                    <td><?php echo $b->total ?></td>
-                    <td><?php echo $b->date_bon ?></td>
-                    <td><?php echo $b->date_saisis ?></td>
-                    <td><?php echo $si[$i]->nom_site ?></td>
-                    <td><?php echo $se[$i]->nom_service ?></td>
-                    <td><?php echo $ve[$i]->n_vehicule ?></td>
-                    <td><?php echo $pr[$i]->nom ?></td>
-                    <td><?php echo $ut[$i]->name ?></td>
-                    @if(auth()->user()->type !== 'user')
-                    <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="/delete?id={{$b->id}}" class="btn btn-danger" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');">delete</a></td>
-                    @endif
-                </tr>
-                <?php 
-                $i++;
-                } 
-            ?>
-            </tbody>
+       <br> <br>
+       <table class="table table-bordered table-striped professional-table">
+        <thead class="table-header">
+        <tr>
+            <th class="col-bon">n° Bon</th>
+            <th class="col-carburant">type carburant</th>
+            <th class="col-qty">Qté</th>
+            <th class="col-prix">prix</th>
+            <th class="col-total">total</th>
+            <th class="col-date">date_bon</th>
+            <th class="col-date">date_saisis</th>
+            <th class="col-site">site</th>
+            <th class="col-service">service</th>
+            <th class="col-vehicule">vehicule</th>
+            <th class="col-preneur">nom preneur</th>
+            <th class="col-saisie">saisis par</th>
+            @if(auth()->user()->type !== 'user')
+            <th class="col-action">modifier</th>
+            <th class="col-action">supprimer</th>
+            @endif
+        </tr>
+        </thead>
+        <tbody class="tbody">
+        <?php
+            $i=0;
+            foreach($bons as $b){
+        ?>
+        <tr>
+            <td><?php echo $b->n_bon ?></td>
+            <td><?php echo $b->type_carburant ?></td>
+            <td><?php echo $b->quantite ?></td>
+            <td><?php echo $b->prix ?></td>
+            <td><?php echo $b->total ?></td>
+            <td><?php echo $b->date_bon ?></td>
+            <td><?php echo $b->date_saisis ?></td>
+            <td><?php echo $si[$i]->nom_site ?></td>
+            <td><?php echo $se[$i]->nom_service ?></td>
+            <td><?php echo $ve[$i]->n_vehicule ?></td>
+            <td><?php echo $pr[$i]->nom ?></td>
+            <td><?php echo $ut[$i]->name ?></td>
+            @if(auth()->user()->type !== 'user')
+            <td><a href="/update?id={{$b->id}}" class="btn btn-edit-pro"><img src="/img/modifier.png" alt="" height="15px" width="15px"></a></td>
+            <td><a href="/delete?id={{$b->id}}" class="btn btn-delete-pro" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');"><img src="/img/supprimer.png" alt="" height="15px" width="15px"></a></td>
+            @endif
+        </tr>
+        <?php
+        $i++;
+        }
+        ?>
+        </tbody>
         </table>
+
+<style>
+.table-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.table-header th {
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    padding: 0.9rem 0.4rem;
+    border: none;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.2;
+}
+</style>
     </div>
     </div>
 </div>

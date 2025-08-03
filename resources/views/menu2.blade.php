@@ -12,7 +12,7 @@
 <body>
   <div id="menu1">
     
-    <img src="/img/logo3.png" alt="Logo" height="150" width="200" style="margin-top:50px;"/>
+    <img src="/img/logo3.png" alt="Logo" height="185" width="200" style="margin-top:50px;"/>
     <ul class="nav flex-column bg-dark p-3">
       <li class="nav-item"><a href="/dashbord" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
 

@@ -13,16 +13,16 @@
     <!-- Menu -->
 <nav id="menu" class="bg-dark shadow-sm">
   <div class="container-fluid d-flex justify-content-between align-items-center">
-    <ul class="nav">
+    <ul class="nav" style="margin-left:200px">
       <li class="nav-item">
-        <a class="nav-link text-white fw-semibold px-3" href="/acc">Accueil</a>
+        <a class="nav-link text-white fw-semibold px-3 me-5" href="/acc">Accueil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-white fw-semibold px-3" href="/ab">Ajouter</a>
+        <a class="nav-link text-white fw-semibold px-3 me-5" href="/ab">Ajouter</a>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white fw-semibold px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle text-white fw-semibold px-3 me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Rechercher
         </a>
         <ul class="dropdown-menu">
@@ -33,11 +33,11 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link text-white fw-semibold px-3" href="/pc">Prix carburant</a>
+        <a class="nav-link text-white fw-semibold px-3 me-5" href="/pc">Prix carburant</a>
       </li>
 
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle text-white fw-semibold px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="nav-link dropdown-toggle text-white fw-semibold px-3 me-5" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Imprimer
         </a>
         <ul class="dropdown-menu">
