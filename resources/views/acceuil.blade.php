@@ -25,7 +25,7 @@
     <div class="container">
         <div class="container" style="margin-top:80px;">
             <div class="row justify-content-center align-items-center">
-                 <div class="col-auto">
+                <div class="col-auto">
                 <img src="/img/11.jpg" alt="" width="400px" height="200px" />
                 </div>
                 <div class="col-auto">
@@ -53,6 +53,13 @@
         Exporter vers Excel
        </a>
        <br> <br>
+
+        @if(session('success'))
+        <div class="alert alert-success w-50 mx-auto">
+        {{ session('success') }}
+        </div>
+         @endif
+
        <table class="table table-bordered table-striped professional-table">
         <thead class="table-header">
         <tr>
@@ -82,9 +89,9 @@
         <tr>
             <td><?php echo $b->n_bon ?></td>
             <td><?php echo $b->type_carburant ?></td>
-            <td><?php echo $b->quantite ?></td>
-            <td><?php echo $b->prix ?></td>
-            <td><?php echo $b->total ?></td>
+            <td><?php echo number_format($b->quantite, 2); ?></td>
+            <td><?php echo number_format($b->prix, 2); ?></td>
+            <td><?php echo number_format($b->total, 2); ?></td>
             <td><?php echo $b->date_bon ?></td>
             <td><?php echo $b->date_saisis ?></td>
             <td><?php echo $si[$i]->nom_site ?></td>

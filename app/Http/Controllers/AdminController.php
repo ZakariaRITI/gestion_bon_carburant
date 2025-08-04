@@ -119,7 +119,7 @@ class AdminController extends Controller
          $bon->utilisateur_id=$user;
 
          $bon->save();
-         return redirect('/acc');
+         return redirect('/acc')->with('success', 'Le bon a été ajouté avec succès !');
      }
 
      public function prixcarburant()
@@ -322,7 +322,8 @@ class AdminController extends Controller
          $bon->utilisateur_id=$user;
 
          $bon->save();
-         return redirect('/acc');
+         return redirect('/acc')->with('success', 'Bon modifié avec succès.');
+
       }
 
       public function supprimer_bon(Request $request)

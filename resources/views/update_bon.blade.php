@@ -7,160 +7,161 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
+    body {
+        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main-container {
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        margin: 20px;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .header-section {
+        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+    }
+
+    .header-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.05"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.05"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    }
+
+    .header-section h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        position: relative;
+        z-index: 1;
+    }
+
+    .header-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        opacity: 0.9;
+    }
+
+    .form-container {
+        padding: 40px;
+    }
+
+    .form-floating {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-floating > .form-control,
+    .form-floating > .form-select {
+        height: calc(3.5rem + 2px);
+        padding: 1rem 0.75rem;
+    }
+
+    .form-floating > label {
+        padding: 1rem 0.75rem;
+        font-weight: 500;
+        color: #475569;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+        border-color: #0ea5e9;
+        box-shadow: 0 0 0 0.25rem rgba(14, 165, 233, 0.25);
+    }
+
+    .btn-update {
+        background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
+        border: none;
+        padding: 15px 40px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(14, 165, 233, 0.3);
+    }
+
+    .btn-update:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+        background: linear-gradient(135deg, #0ea5e9 0%, #0f172a 100%);
+    }
+
+    .form-row {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .form-col {
+        flex: 1;
+        min-width: 250px;
+    }
+
+    .info-card {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2f5fb 100%);
+        border: 1px solid #e2f5fb;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .info-card h5 {
+        color: #0ea5e9;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .alert-custom {
+        background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+        border: 1px solid #ffeaa7;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .readonly-field {
+        background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    }
+
+    .date-input {
+        height: calc(3.5rem + 2px);
+        padding: 1rem 0.75rem;
+    }
+
+    @media (max-width: 768px) {
         .main-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            padding: 0;
-            overflow: hidden;
-        }
-        
-        .header-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .header-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-        }
-        
-        .header-section h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .header-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-        
-        .form-container {
-            padding: 40px;
-        }
-        
-        .form-floating {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-floating > .form-control,
-        .form-floating > .form-select {
-            height: calc(3.5rem + 2px);
-            padding: 1rem 0.75rem;
-        }
-        
-        .form-floating > label {
-            padding: 1rem 0.75rem;
-            font-weight: 500;
-            color: #6c757d;
-        }
-        
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
-        }
-        
-        .btn-update {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-        
-        .btn-update:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-        }
-        
-        .form-row {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        
-        .form-col {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .info-card {
-            background: linear-gradient(135deg, #f8f9ff 0%, #e3f2fd 100%);
-            border: 1px solid #e3f2fd;
+            margin: 10px;
             border-radius: 15px;
+        }
+
+        .form-container {
             padding: 20px;
-            margin-bottom: 30px;
         }
-        
-        .info-card h5 {
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 15px;
+
+        .form-row {
+            flex-direction: column;
+            gap: 0;
         }
-        
-        .alert-custom {
-            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-            border: 1px solid #ffeaa7;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
+
+        .header-section h1 {
+            font-size: 2rem;
         }
-        
-        .readonly-field {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-        
-        .date-input {
-            height: calc(3.5rem + 2px);
-            padding: 1rem 0.75rem;
-        }
-        
-        @media (max-width: 768px) {
-            .main-container {
-                margin: 10px;
-                border-radius: 15px;
-            }
-            
-            .form-container {
-                padding: 20px;
-            }
-            
-            .form-row {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            .header-section h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    }
+</style>
+
 </head>
 <body>
     <div id="d1">
@@ -231,7 +232,7 @@
                                 
                                 <div class="form-col">
                                     <div class="form-floating">
-                                        <input type="number" value="{{$bon->quantite}}" step="0.5" class="form-control" name="quantite" id="q" min="0" required placeholder="Quantité">
+                                        <input type="number" value="{{$bon->quantite}}" step="0.1" class="form-control" name="quantite" id="q" min="0" required placeholder="Quantité">
                                         <label for="q"><i class="fas fa-tachometer-alt me-2"></i>Quantité (L)</label>
                                     </div>
                                 </div>
@@ -251,7 +252,7 @@
                                 
                                 <div class="form-col">
                                     <div class="form-floating">
-                                        <input type="date" value="{{$bon->date_saisis}}" id="ds" name="date_saisis" class="form-control date-input" required>
+                                        <input type="date" value="{{$bon->date_saisis}}" id="ds" name="date_saisis" class="form-control date-input" readonly required>
                                         <label for="ds"><i class="fas fa-keyboard me-2"></i>Date de Saisie</label>
                                     </div>
                                 </div>
@@ -330,48 +331,47 @@
 
     <script>
         document.getElementById('tc').addEventListener('change', function() {
-            const prix = this.options[this.selectedIndex].getAttribute('data-prix');
-            document.getElementById('p').value = prix || '';
-        });
+    const prix = this.options[this.selectedIndex].getAttribute('data-prix');
+    document.getElementById('p').value = prix || '';
+});
 
-        document.getElementById('form').addEventListener('submit', function(e) {
-            const nb = document.getElementById('nb').value.trim();
+document.getElementById('form').addEventListener('submit', function(e) {
+    const nb = document.getElementById('nb').value.trim();
+    const regexSixChiffres = /^\d{6}$/;
 
-            if (nb.length !== 6) {
-                e.preventDefault();
-                // Utiliser Bootstrap alert au lieu de alert basique
-                const alertDiv = document.createElement('div');
-                alertDiv.className = 'alert alert-danger alert-dismissible fade show';
-                alertDiv.innerHTML = `
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    <strong>Erreur :</strong> Le n° bon doit être composé de 6 chiffres.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                `;
-                document.querySelector('.form-container').insertBefore(alertDiv, document.querySelector('form'));
-                
-                // Faire défiler vers l'alerte
-                alertDiv.scrollIntoView({ behavior: 'smooth' });
-                
-                // Supprimer l'alerte après 5 secondes
-                setTimeout(() => {
-                    if (alertDiv.parentNode) {
-                        alertDiv.remove();
-                    }
-                }, 5000);
+    // Supprimer les anciens messages d'erreur affichés
+    const oldAlert = document.querySelector('.alert-danger');
+    if (oldAlert) {
+        oldAlert.remove();
+    }
+
+    if (!regexSixChiffres.test(nb)) {
+        e.preventDefault();
+
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger alert-dismissible fade show';
+        alertDiv.innerHTML = `
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Erreur :</strong> Le n° bon doit être composé de 6 chiffres.
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+
+        const formContainer = document.querySelector('.form-container');
+        const form = formContainer.querySelector('form');
+        formContainer.insertBefore(alertDiv, form);
+
+        const offset = alertDiv.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.remove();
             }
-        });
+        }, 5000);
+    }
+});
 
-        // Animation pour les inputs
-        document.querySelectorAll('.form-control, .form-select').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-                this.parentElement.style.transition = 'transform 0.2s ease';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-        });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

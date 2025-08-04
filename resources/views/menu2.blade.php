@@ -12,12 +12,12 @@
 <body>
   <div id="menu1">
     
-    <img src="/img/logo3.png" alt="Logo" height="185" width="200" style="margin-top:50px;"/>
+    <img src="/img/logo3.png" alt="Logo" height="200" width="200" style="margin-top:50px;"/>
     <ul class="nav flex-column bg-dark p-3">
-      <li class="nav-item"><a href="/dashbord" class="nav-link fs-4 fw-bold text-white">Tableau de bord</a></li>
+      <li class="nav-item"><a href="/dashbord" class="nav-link fs-5 fw-bold text-white mb-2">Tableau de bord</a></li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Site
         </a>
         <ul class="dropdown-menu" aria-labelledby="siteDropdown">
@@ -27,7 +27,7 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Service
         </a>
         <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
@@ -37,7 +37,7 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="vehiculeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="vehiculeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Vehicule
         </a>
         <ul class="dropdown-menu" aria-labelledby="vehiculeDropdown">
@@ -47,7 +47,7 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="preneurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="preneurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Preneur
         </a>
         <ul class="dropdown-menu" aria-labelledby="preneurDropdown">
@@ -57,7 +57,7 @@
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-4 fw-bold text-white dropdown-toggle" id="utilisateurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="utilisateurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           Utilisateur
         </a>
         <ul class="dropdown-menu" aria-labelledby="utilisateurDropdown">
@@ -66,7 +66,7 @@
         </ul>
       </li>
 
-      <li class="nav-item"><a href="/support" class="nav-link fs-4 fw-bold text-white">Support & Aide</a></li>
+      <li class="nav-item"><a href="/support" class="nav-link fs-5 fw-bold text-white">Support & Aide</a></li>
 
       <li><hr class="my-2" /></li>
 

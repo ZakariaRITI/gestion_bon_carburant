@@ -28,6 +28,10 @@
         word-wrap: break-word;
         text-align: center;
     }
+    td:nth-child(1), td:nth-child(2) {
+    white-space: nowrap;
+}
+
     thead tr {
         background-color: #eee;
     }
@@ -57,9 +61,8 @@
                 <th style="width: 9%;">Date Saisie</th>
                 <th style="width: 9%;">Site</th>
                 <th style="width: 9%;">Service</th>
-                <th style="width: 8%;">Véhicule</th>
+                <th style="width: 8%; white-space: nowrap;">Véhicule</th>
                 <th style="width: 12%;">Preneur</th>
-                <th>Saisi par</th>
             </tr>
         </thead>
         <tbody>
@@ -68,16 +71,15 @@
             <tr>
                 <td>{{ $b->n_bon }}</td>
                 <td>{{ $b->type_carburant }}</td>
-                <td>{{ $b->quantite }}</td>
-                <td>{{ $b->prix }}</td>
-                <td>{{ $b->total }}</td>
+                <td>{{ number_format($b->quantite, 2, ',', '') }}</td>
+                <td>{{ number_format($b->prix, 2, ',', '') }}</td>
+                <td>{{ number_format($b->total, 2, ',', '') }}</td>
                 <td>{{ $b->date_bon }}</td>
                 <td>{{ $b->date_saisis }}</td>
                 <td>{{ $si[$i]->nom_site }}</td>
                 <td>{{ $se[$i]->nom_service }}</td>
                 <td>{{ $ve[$i]->n_vehicule }}</td>
                 <td>{{ $pr[$i]->nom }}</td>
-                <td>{{ $b->utilisateur->name ?? '' }}</td>
             </tr>
             @php $i++; @endphp
             @endforeach

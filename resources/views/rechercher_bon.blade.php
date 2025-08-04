@@ -5,21 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rechercher Bon</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/menu.css">
+    <link rel="stylesheet" href="/css/acceuil.css">
 </head>
 <body>
-    <div class="container">
+    <div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
+    <div class="container" style="margin-left:200px;">
+
         <div id="menu">
             @include('menu')
         </div> <br> <br> <br> <br><br>
-        <h1 class="h1 text-center">Recherche par n°Bon</h1>
-        <div class="d-flex justify-content-center mt-4">
-        <form action="" method="get" class="d-flex gap-2 mt-4" style="max-width: 400px;">
-            <label for="s" class="form-label"></label><input type="search" class="form-control" value="{{ $motcle ?? '' }}" name="motcle" id="s" placeholder="n°bon">
-            <input type="submit" value="rechercher" class="btn btn-primary">
-        </form>
-        </div>
-    <br> <br> 
+        <h1 class="h1 text-center mb-4 fw-bold" style="color:#0f172a; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+    Recherche par n°Bon
+</h1>
+
+<div class="d-flex justify-content-center">
+    <form action="" method="get" class="d-flex gap-2" style="max-width: 400px; width: 100%;">
+        <input 
+            type="search" 
+            class="form-control shadow-sm border-0 rounded-3" 
+            value="{{ $motcle ?? '' }}" 
+            name="motcle" 
+            id="s" 
+            placeholder="Entrez le n° bon" 
+            style="padding: 12px 20px; font-size: 1.1rem;"
+        >
+        <button type="submit" class="btn btn-primary px-4 fw-semibold shadow-sm" style="font-size: 1.1rem;">
+            Rechercher
+        </button>
+    </form>
+</div> <br> 
+    <hr class="border-4">
 
     @if($bons->isNotEmpty())
     <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1> <br>
@@ -30,25 +55,26 @@
     <a href="/export-excel_nbon?motcle={{ $motcle }}" class="btn btn-success text-white fw-bold" style="margin-left:800px">
         Exporter vers Excel
     </a> <br> <br>
-        <table class="table table-bordered">
-            <thead class="table-primary">
+        <table class="table table-bordered table-striped professional-table">
+            <thead class="table-header">
                 <tr>
-                <th>n° Bon</th>
-                <th>type carburant</th>
-                <th>quantite</th>
-                <th>prix</th>
-                <th>total</th>
-                <th>date_bon</th>
-                <th>date_saisis</th>
-                <th>site</th>
-                <th>service</th>
-                <th>n°vehicule</th>
-                <th>nom preneur</th>
-                <th>saisis par</th>
-                @if(auth()->user()->type !== 'user')
-                <th>modifier</th>
-                <th>supprimer</th>
-                @endif
+                <th class="col-bon">n° Bon</th>
+            <th class="col-carburant">type carburant</th>
+            <th class="col-qty">Qté</th>
+            <th class="col-prix">prix</th>
+            <th class="col-total">total</th>
+            <th class="col-date">date_bon</th>
+            <th class="col-date">date_saisis</th>
+            <th class="col-site">site</th>
+            <th class="col-service">service</th>
+            <th class="col-vehicule">vehicule</th>
+            <th class="col-preneur">nom preneur</th>
+            <th class="col-saisie">saisis par</th>
+            @if(auth()->user()->type !== 'user')
+            <th class="col-action">modifier</th>
+            <th class="col-action">supprimer</th>
+            @endif
+            </tr>
                 </tr>
             </thead>
                 <?php
@@ -69,9 +95,9 @@
                     <td><?php echo $b->preneur->nom ?></td>
                     <td><?php echo $b->utilisateur->name ?></td>
                     @if(auth()->user()->type !== 'user')
-                    <td><a href="/update?id={{$b->id}}" class="btn btn-warning">update</a></td>
-                    <td><a href="/delete?id={{$b->id}}" class="btn btn-danger">delete</a></td>
-                    @endif
+            <td><a href="/update?id={{$b->id}}" class="btn btn-edit-pro"><img src="/img/modifier.png" alt="" height="15px" width="15px"></a></td>
+            <td><a href="/delete?id={{$b->id}}" class="btn btn-delete-pro" onclick="return confirm('Le bon sera supprimé définitivement. Veuillez confirmer la suppression.');"><img src="/img/supprimer.png" alt="" height="15px" width="15px"></a></td>
+            @endif
                 </tr>
             </tbody>
             <?php 
@@ -82,5 +108,27 @@
         <p class="text-center text-danger fw-bold">le N°Bon saisis n'est pas disponible</p>
         @endif
         </div>
+        <style>
+.table-header {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.table-header th {
+    background: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+    padding: 0.9rem 0.4rem;
+    border: none;
+    text-align: center;
+    position: relative;
+    overflow: visible;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.2;
+}
+</style>
 </body>
 </html>
