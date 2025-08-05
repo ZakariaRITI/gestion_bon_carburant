@@ -46,7 +46,7 @@
     <hr class="my-4">
 
     <div class="text-center">
-        <h4 class="fw-bold fs-3">LISTE DES BONS DE CONSOMMATION DE CARBURANT</h4>
+        <h4 class="fw-bold fs-3">Rapport des Bons de Consommation de Carburant</h4>
     </div>
 
     <table>

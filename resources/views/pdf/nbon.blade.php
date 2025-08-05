@@ -46,7 +46,7 @@
 
     @if($bons->isNotEmpty())
         <div class="text-center">
-            <h4 class="fw-bold fs-3">DÉTAIL DES CONSOMMATIONS CARBURANT</h4>
+            <h4 class="fw-bold fs-3">Rapport de consommation de carburant</h4>
         </div>
 
         <table>

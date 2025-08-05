@@ -148,7 +148,7 @@ class AdminController extends Controller
         $carburantb->prix=$b;
         $carburanta->save();
         $carburantb->save();
-        return redirect('/acc');
+        return redirect('/acc')->with('success', 'Le prix du carburant a été modifié avec succès.');
      }
 
      public function recherche_nbon(Request $request)
@@ -342,6 +342,7 @@ class AdminController extends Controller
          switch ($type) 
          {
          case 'site':
+          $sites=Site::All();
             $bons = DB::table('bons')
             ->join('sites', 'bons.site_id', '=', 'sites.id')
             ->select('sites.code_site','sites.nom_site',
@@ -353,8 +354,9 @@ class AdminController extends Controller
             ->orderBy('sites.code_site')
             ->get()
             ->groupBy('code_site');
-            return view('impression_site',compact('start','end','bons'));
+            return view('impression_site',compact('start','end','bons','sites'));
         case 'service':
+          $services=Service::All();
             $bons = DB::table('bons')
             ->join('services', 'bons.service_id', '=', 'services.id')
             ->select('services.code_service','services.nom_service',
@@ -366,8 +368,9 @@ class AdminController extends Controller
             ->orderBy('services.code_service')
             ->get()
             ->groupBy('code_service');
-            return view('impression_service',compact('start','end','bons'));
+            return view('impression_service',compact('start','end','bons','services'));
         case 'vehicule':
+          $vehicules=Vehicule::All();
             $bons = Bon::join('vehicules', 'bons.vehicule_id', '=', 'vehicules.id')
             ->select('bons.vehicule_id','vehicules.n_vehicule','vehicules.marque',
             DB::raw('LOWER(bons.type_carburant) as type_carburant'),
@@ -378,8 +381,9 @@ class AdminController extends Controller
             DB::raw('LOWER(bons.type_carburant)'))
             ->get()
             ->groupBy('vehicule_id');
-            return view('impression_vehicule',compact('start','end','bons'));
+            return view('impression_vehicule',compact('start','end','bons','vehicules'));
         case 'preneur':
+          $preneurs=Preneur::All();
             $bons = Bon::join('preneurs', 'bons.preneur_id', '=', 'preneurs.id')
             ->select('bons.preneur_id','preneurs.n_matricule','preneurs.nom',
             DB::raw('LOWER(bons.type_carburant) as type_carburant'),
@@ -390,7 +394,7 @@ class AdminController extends Controller
             DB::raw('LOWER(bons.type_carburant)'))
             ->get()
             ->groupBy('preneur_id');
-            return view('impression_preneur',compact('start','end','bons'));
+            return view('impression_preneur',compact('start','end','bons','preneurs'));
         case 'journee':
             $bons=DB::table("bons")
             ->select('bons.n_bon','bons.date_bon',

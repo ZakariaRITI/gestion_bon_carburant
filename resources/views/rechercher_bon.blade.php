@@ -47,7 +47,7 @@
     <hr class="border-4">
 
     @if($bons->isNotEmpty())
-    <h1 class="h1 fw-bold text-center">Liste de consomation de caburant par n°bon</h1> <br>
+    <h1 class="h1 fw-bold text-center">Liste des bons filtrés par numéro</h1> <br>
     <a href="/impression-bon-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
     </a>

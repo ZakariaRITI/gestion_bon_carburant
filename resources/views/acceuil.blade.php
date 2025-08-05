@@ -42,7 +42,7 @@
         </div>
         
         <h1 class="text-center display-5 fw-bold py-3 px-2 bg-light border-top border-bottom border-2 shadow-sm mt-3 mb-4">
-            Liste de consommation de carburant
+            Liste des Bons de Consommation de Carburant
         </h1>
 
         <a href="/impression-acc-pdf" target="_blank" class="btn btn-danger float-end fw-bold">
@@ -55,7 +55,7 @@
        <br> <br>
 
         @if(session('success'))
-        <div class="alert alert-success w-50 mx-auto">
+        <div class="alert alert-success w-50 mx-auto text-center">
         {{ session('success') }}
         </div>
          @endif

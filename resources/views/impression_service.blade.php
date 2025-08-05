@@ -6,13 +6,48 @@
     <title>Impression Service</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
+    <div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
     <div id="menu">
         @include('menu')
-    </div> <br> <br> <br> <br> <br>
+    </div> <br> <br> <br> <br>
 
-    <div class="container">
+    <div class="container" style="margin-left:200px;">
+    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:500px;">
+    <input type="hidden" name="start" value="{{ $start }}">
+    <input type="hidden" name="end" value="{{ $end }}">
+
+    <label for="servicesSelect" class="fw-bold">Sélectionnez les services :</label><br>
+
+    <select id="servicesSelect" name="services[]" multiple>
+        @foreach ($services as $service)
+            <option value="{{ $service->code_service }}"
+                {{ (is_array(request('services')) && in_array($service->code_service, request('services'))) ? 'selected' : '' }}>
+                {{ $service->code_service }} - {{ $service->nom_service }}
+            </option>
+        @endforeach
+    </select>
+
+    <div style="display: flex; flex-direction: column;  margin-top: -100px; align-items: flex-start; margin-left:400px;">
+        <button type="button" id="selectAllBtn" class="btn btn-sm btn-outline-primary mt-2 mb-2">
+            Tout sélectionner / Désélectionner
+        </button>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+    </div>
+    </form> <br>
+        <hr class="border-4">
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
@@ -54,7 +89,12 @@
                 $totalqessence=0;
                 $totalqdiesel=0;
             @endphp 
+            @php
+            $selectedServices = request('services') ?? [];
+            @endphp
+            
             @foreach ($bons as $codeservice => $serviceBons)
+            @if (empty($selectedServices) || in_array($codeservice, $selectedServices))
              @php
                 $essenceQuantite = $serviceBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
@@ -91,6 +131,7 @@
 
                 <td>{{ number_format($totalValeur, 2, ',', ' ') }}</td>
             </tr>
+            @endif
             @endforeach
             <tr>
                 <td colspan="2" class="fs-2">Total general</td>
@@ -117,5 +158,53 @@
 
         document.getElementById("jour").textContent="Le "+dateFr+" à "+`${h}:${m}`;
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#servicesSelect').select2({
+            placeholder: "Sélectionnez les services",
+            width: '300px',
+            minimumResultsForSearch: Infinity,
+            templateSelection: function() {
+                // Retourne un élément vide qui maintient la hauteur
+                return $('<span style="display:inline-block; width:100%; height:100%;">&nbsp;</span>');
+            },
+            templateResult: function(data) {
+                // Affiche le code et nom complet dans le menu déroulant
+                return data.text;
+            },
+            escapeMarkup: function(m) { 
+                return m; 
+            }
+        });
+
+        // Bouton Tout sélectionner/désélectionner
+        $('#selectAllBtn').click(function() {
+            let allSelected = $('#servicesSelect option').length === $('#servicesSelect').val()?.length;
+            $('#servicesSelect').val(allSelected ? null : $('#servicesSelect option').map(function() {
+                return $(this).val();
+            }).get()).trigger('change');
+        });
+    });
+</script>
+
+<style>
+    /* Cache tous les éléments visuels dans la barre de sélection */
+    .select2-selection__rendered {
+        line-height: 34px !important;
+    }
+    .select2-selection__choice,
+    .select2-selection__clear,
+    .select2-selection__arrow {
+        display: none !important;
+    }
+    
+    /* Style pour le menu déroulant */
+    .select2-results__option {
+        padding: 6px 12px;
+    }
+</style>
+    
 </body>
 </html>

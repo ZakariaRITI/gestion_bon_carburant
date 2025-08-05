@@ -273,7 +273,7 @@
         <h1 class="main-title">Ajouter un Bon de Carburant</h1>
         
         <div class="form-card">
-            <form action="/save" method="get" id="form">
+            <form action="/save" method="post" id="form">
                 @csrf
                 
                 <div class="form-group">
@@ -301,7 +301,7 @@
 
                 <div class="form-group">
                     <label for="q" class="form-label">Quantité (L)</label>
-                    <input type="number" step="0.1" class="form-control" name="quantite" id="q" min="0" required placeholder="0.0" value="{{ old('quantite') }}">
+                    <input type="number" step="0.1" class="form-control" name="quantite" id="q" min="0" placeholder="0.0" value="{{ old('quantite') }}" oninvalid="this.setCustomValidity('')" oninput="this.setCustomValidity('')" >
                 </div>
 
                 <div class="form-group">
@@ -399,6 +399,17 @@
             });
         });
         
+        document.getElementById('form').addEventListener('submit', function(e) {
+    const quantiteInput = document.getElementById('q');
+    const quantiteValue = quantiteInput.value.trim();
+
+    if (quantiteValue === '' || isNaN(quantiteValue) || Number(quantiteValue) < 0) {
+        e.preventDefault();  // Empêche la soumission
+        alert('Veuillez saisir une quantité valide supérieure ou égale à 0.');
+        quantiteInput.focus();
+    }
+});
+
     </script>
 </body>
 </html>

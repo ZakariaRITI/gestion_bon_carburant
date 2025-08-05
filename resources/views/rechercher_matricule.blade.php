@@ -48,7 +48,7 @@
         <hr class="border-4">
 
         @if($bons->isNotEmpty())
-        <h1 class="h1 fw-bold text-center">Liste de consommation de carburant par n°matricule</h1> <br>
+        <h1 class="h1 fw-bold text-center">Liste des bons filtrés par matricule</h1> <br>
 
         <a href="/impression-matricule-pdf?motcle={{ $motcle }}" target="_blank" class="btn btn-danger float-end fw-bold">
             Télécharger / Imprimer PDF
