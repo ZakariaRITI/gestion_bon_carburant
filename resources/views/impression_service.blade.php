@@ -22,10 +22,10 @@
     </div>
     <div id="menu">
         @include('menu')
-    </div> <br> <br> <br> <br>
+    </div>
 
     <div class="container" style="margin-left:200px;">
-    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:500px;">
+    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:400px; margin-top:120px;">
     <input type="hidden" name="start" value="{{ $start }}">
     <input type="hidden" name="end" value="{{ $end }}">
 
@@ -162,37 +162,37 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
     $(document).ready(function() {
-        $('#servicesSelect').select2({
-            placeholder: "Sélectionnez les services",
-            width: '300px',
-            minimumResultsForSearch: Infinity,
-            templateSelection: function() {
-                // Retourne un élément vide qui maintient la hauteur
-                return $('<span style="display:inline-block; width:100%; height:100%;">&nbsp;</span>');
-            },
-            templateResult: function(data) {
-                // Affiche le code et nom complet dans le menu déroulant
-                return data.text;
-            },
-            escapeMarkup: function(m) { 
-                return m; 
-            }
-        });
-
-        // Bouton Tout sélectionner/désélectionner
-        $('#selectAllBtn').click(function() {
-            let allSelected = $('#servicesSelect option').length === $('#servicesSelect').val()?.length;
-            $('#servicesSelect').val(allSelected ? null : $('#servicesSelect option').map(function() {
-                return $(this).val();
-            }).get()).trigger('change');
-        });
+    $('#servicesSelect').select2({
+        placeholder: "Tapez pour rechercher",
+        width: '300px',
+        minimumResultsForSearch: Infinity,
+        closeOnSelect: false, // Empêche la fermeture après sélection
+        templateSelection: function(data) {
+            // Affiche le texte normalement
+            return data.text;
+        },
+        templateResult: function(data) {
+            return data.text;
+        },
+        escapeMarkup: function(m) { 
+            return m; 
+        }
     });
+
+    // Bouton Tout sélectionner/désélectionner
+    $('#selectAllBtn').click(function() {
+        let allSelected = $('#servicesSelect option').length === $('#servicesSelect').val()?.length;
+        $('#servicesSelect').val(allSelected ? null : $('#servicesSelect option').map(function() {
+            return $(this).val();
+        }).get()).trigger('change');
+    });
+});
 </script>
 
 <style>
     /* Cache tous les éléments visuels dans la barre de sélection */
     .select2-selection__rendered {
-        line-height: 34px !important;
+        line-height: 14px !important;
     }
     .select2-selection__choice,
     .select2-selection__clear,

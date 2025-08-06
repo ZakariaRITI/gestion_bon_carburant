@@ -6,13 +6,93 @@
     <title>Impression Preneur</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Style personnalisé pour le select2 */
+        .select2-container--default .select2-selection--multiple {
+            min-height: 14px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
+        .select2-container {
+            width: 300px !important;
+        }
+        #filterForm {
+            margin-left: 200px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .filter-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .filter-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Cache complètement les tags (texte sélectionné) */
+.select2-selection__choice {
+    display: none !important;
+}
+
+/* Cache l’icône de suppression (croix) */
+.select2-selection__choice__remove {
+    display: none !important;
+}
+
+/* Cache aussi l’icône de flèche à droite */
+.select2-selection__arrow {
+    display: none !important;
+}
+
+    </style>
 </head>
 <body>
+    <div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
     <div id="menu">
         @include('menu')
-    </div> <br> <br> <br> <br> <br>
+    </div>
 
-    <div class="container">
+    <div class="container" style="margin-left:200px;">
+    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:380px; margin-top:75px;">
+        <input type="hidden" name="start" value="{{ $start }}">
+        <input type="hidden" name="end" value="{{ $end }}">
+
+        <div class="filter-container">
+            <div>
+                <label for="preneursSelect" class="fw-bold">Sélectionnez les preneurs :</label><br>
+                <select id="preneursSelect" name="preneurs[]" multiple>
+    @foreach ($preneurs as $preneur)
+        <option value="{{ $preneur->id }}"
+            {{ (is_array(request('preneurs')) && in_array($preneur->id, request('preneurs'))) ? 'selected' : '' }}>
+            {{ $preneur->n_matricule }} - {{ $preneur->nom }}
+        </option>
+    @endforeach
+</select>
+            </div>
+
+            <div style="display: flex; flex-direction: column; align-items: flex-start; margin-left:100px;">
+        <button type="button" id="selectAllBtn" class="btn btn-sm btn-outline-primary mt-2 mb-2">
+            Tout sélectionner / Désélectionner
+        </button>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+    </div>
+        </div>
+    </form> 
+        <hr class="border-4">
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
@@ -53,7 +133,12 @@
                 $totalqessence=0;
                 $totalqdiesel=0;
             @endphp 
+            @php
+            $selectedPreneurs = request('preneurs') ?? [];
+            @endphp
+            
             @foreach ($bons as $codepreneur => $preneurBons)
+            @if (empty($selectedPreneurs) || in_array($codepreneur, $selectedPreneurs))
              @php
                 $essenceQuantite = $preneurBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
@@ -90,6 +175,7 @@
 
                 <td>{{ number_format($totalValeur, 2, ',', ' ') }}</td>
             </tr>
+            @endif
             @endforeach
             <tr>
                 <td colspan="2" class="fs-2">Total general</td>
@@ -115,6 +201,36 @@
         let s = today.getSeconds().toString().padStart(2, '0');
 
         document.getElementById("jour").textContent="Le "+dateFr+" à "+`${h}:${m}`;
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+       $(document).ready(function() {
+    $('#preneursSelect').select2({
+    placeholder: "Tapez pour rechercher",
+    width: '100%',
+    closeOnSelect: false,
+    templateSelection: function () { return ""; }, // Pas de texte affiché
+    language: {
+        noResults: function() {
+            return "Aucun preneur trouvé";
+        }
+    }
+});
+
+
+    $('#preneursSelect').on('select2:open', function() {
+        $('.select2-search__field').val('').trigger('input');
+    });
+
+    $('#selectAllBtn').click(function() {
+        let allSelected = $('#preneursSelect option').length === $('#preneursSelect').val()?.length;
+        $('#preneursSelect').val(allSelected ? null : $('#preneursSelect option').map(function() {
+            return $(this).val();
+        }).get()).trigger('change');
+    });
+});
     </script>
 </body>
 </html>

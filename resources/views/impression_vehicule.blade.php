@@ -6,13 +6,59 @@
     <title>Impression Vehicule</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Cacher la croix de suppression dans Select2 */
+    .select2-selection__choice__remove {
+        display: none !important;
+    }
+
+    /* Si tu veux aussi cacher complètement la zone de tags */
+    .select2-selection__choice {
+        display: none !important;
+    }
+    </style>
 </head>
 <body>
+    <div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
     <div id="menu">
         @include('menu')
-    </div> <br> <br> <br> <br> <br>
+    </div>
 
-    <div class="container">
+    <div class="container" style="margin-left:200px;">
+    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:400px; margin-top:120px;">
+    <input type="hidden" name="start" value="{{ $start }}">
+    <input type="hidden" name="end" value="{{ $end }}">
+
+    <label for="vehiculesSelect" class="fw-bold">Sélectionnez les véhicules :</label><br>
+
+    <select id="vehiculesSelect" name="vehicules[]" multiple>
+        @foreach ($vehicules as $vehicule)
+            <option value="{{ $vehicule->id }}"
+                {{ (is_array(request('vehicules')) && in_array($vehicule->id, request('vehicules'))) ? 'selected' : '' }}>
+                {{ $vehicule->n_vehicule }} - {{ $vehicule->marque }}
+            </option>
+        @endforeach
+    </select>
+
+    <div style="display: flex; flex-direction: column;  margin-top: -100px; align-items: flex-start; margin-left:400px;">
+        <button type="button" id="selectAllBtn" class="btn btn-sm btn-outline-primary mt-2 mb-2">
+            Tout sélectionner / Désélectionner
+        </button>
+        <button type="submit" class="btn btn-primary">Filtrer</button>
+    </div>
+    </form> <br>
+        <hr class="border-4">
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
@@ -53,9 +99,13 @@
                 $totalqessence=0;
                 $totalqdiesel=0;
             @endphp    
-            @foreach ($bons as $n_vehicule => $vehiculeBons)
+            @php
+            $selectedVehicules = request('vehicules') ?? [];
+            @endphp
+            
+            @foreach ($bons as $vehiculeId => $vehiculeBons)
+            @if (empty($selectedVehicules) || in_array($vehiculeId, $selectedVehicules))
              @php
-
                 $essenceQuantite = $vehiculeBons
                     ->filter(fn($item) => strtolower(trim($item->type_carburant)) === 'essence')
                     ->sum('total_quantite');
@@ -91,6 +141,7 @@
 
                 <td>{{ number_format($totalValeur, 2, ',', ' ') }}</td>
             </tr>
+            @endif
             @endforeach
             <tr>
                 <td colspan="2" class="fs-2">Total general</td>
@@ -117,6 +168,36 @@
         let s = today.getSeconds().toString().padStart(2, '0');
 
         document.getElementById("jour").textContent="Le "+dateFr+" à "+`${h}:${m}`;
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+           $('#vehiculesSelect').select2({
+    placeholder: "Tapez pour rechercher",
+    width: '300px',
+    closeOnSelect: false,
+    templateSelection: function () { return ""; } // Empêche l'affichage du texte sélectionné
+});
+
+
+            // Pour le bouton "Tout sélectionner / Désélectionner"
+            $('#selectAllBtn').click(function() {
+                let allSelected = $('#vehiculesSelect option').length === $('#vehiculesSelect').val()?.length;
+                if (allSelected) {
+                    // Désélectionner tout
+                    $('#vehiculesSelect').val(null).trigger('change');
+                } else {
+                    // Tout sélectionner
+                    let allValues = [];
+                    $('#vehiculesSelect option').each(function() {
+                        allValues.push($(this).val());
+                    });
+                    $('#vehiculesSelect').val(allValues).trigger('change');
+                }
+            });
+        });
     </script>
 </body>
 </html>

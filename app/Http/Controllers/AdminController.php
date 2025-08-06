@@ -660,7 +660,7 @@ class AdminController extends Controller
 
       if ($exists) 
       {
-        return redirect('/update?id='.$id)->with('error', 'Ce code site est déjà utilisé par un autre site.')->withInput();
+        return redirect('/updatesite?id='.$id)->with('error', 'Ce code site est déjà utilisé par un autre site.')->withInput();
       }
 
       $site->code_site=$code;

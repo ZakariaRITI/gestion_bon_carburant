@@ -17,53 +17,33 @@
       <li class="nav-item"><a href="/dashbord" class="nav-link fs-5 fw-bold text-white mb-2">Tableau de bord</a></li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="siteDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="/ds" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="siteDropdown">
           Site
         </a>
-        <ul class="dropdown-menu" aria-labelledby="siteDropdown">
-          <li><a class="dropdown-item fw-bold" href="/as">Ajouter site</a></li>
-          <li><a class="dropdown-item fw-bold" href="/ds">Gestion site</a></li>
-        </ul>
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="/gservice" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="serviceDropdown" >
           Service
         </a>
-        <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
-          <li><a class="dropdown-item fw-bold" href="/aservice">Ajouter service</a></li>
-          <li><a class="dropdown-item fw-bold" href="/gservice">Gestion service</a></li>
-        </ul>
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="vehiculeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="/gvehicule" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="vehiculeDropdown" >
           Vehicule
         </a>
-        <ul class="dropdown-menu" aria-labelledby="vehiculeDropdown">
-          <li><a class="dropdown-item fw-bold" href="/avehicule">Ajouter Vehicule</a></li>
-          <li><a class="dropdown-item fw-bold" href="/gvehicule">Gestion Vehicule</a></li>
-        </ul>
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="preneurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="/gpreneur" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="preneurDropdown" >
           Preneur
         </a>
-        <ul class="dropdown-menu" aria-labelledby="preneurDropdown">
-          <li><a class="dropdown-item fw-bold" href="/apreneur">Ajouter Preneur</a></li>
-          <li><a class="dropdown-item fw-bold" href="/gpreneur">Gestion Preneur</a></li>
-        </ul>
       </li>
 
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="utilisateurDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="/guser" class="nav-link fs-5 fw-bold text-white dropdown-toggle mb-2" id="utilisateurDropdown">
           Utilisateur
         </a>
-        <ul class="dropdown-menu" aria-labelledby="utilisateurDropdown">
-          <li><a class="dropdown-item fw-bold" href="/auser">Ajouter Utilisateur</a></li>
-          <li><a class="dropdown-item fw-bold" href="/guser">Gestion Utilisateur</a></li>
-        </ul>
       </li>
 
       <li class="nav-item"><a href="/support" class="nav-link fs-5 fw-bold text-white">Support & Aide</a></li>

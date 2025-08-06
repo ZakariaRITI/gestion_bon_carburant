@@ -7,7 +7,54 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+    /* Style personnalisé pour le select2 */
+    .select2-container--default .select2-selection--multiple {
+        min-height: 38px;
+        max-height: 100px;
+        overflow-y: auto;
+    }
+    .select2-container {
+        width: 300px !important;
+    }
+    #filterForm {
+        margin-left: 200px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .filter-container {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+    .filter-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
+    /* Cache les tags sélectionnés (texte + fond) */
+.select2-selection__choice {
+    display: none !important;
+}
+
+/* Cache l’icône de suppression (croix) */
+.select2-selection__choice__remove {
+    display: none !important;
+}
+
+/* Cache la flèche de droite */
+.select2-selection__arrow {
+    display: none !important;
+}
+
+/* Ajuste la hauteur pour garder un champ clean */
+.select2-container--default .select2-selection--multiple {
+    min-height: 38px;
+    padding: 4px;
+}
+
+</style>
 </head>
 <body>
     <div id="d1">
@@ -26,29 +73,33 @@
     </div> <br> <br> <br>
 
     <div class="container" style="margin-left:200px;">
-    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:500px;">
-    <input type="hidden" name="start" value="{{ $start }}">
-    <input type="hidden" name="end" value="{{ $end }}">
+    <form method="GET" action="{{ url()->current() }}" id="filterForm" style="margin-left:400px;">
+        <input type="hidden" name="start" value="{{ $start }}">
+        <input type="hidden" name="end" value="{{ $end }}">
 
-    <label for="sitesSelect" class="fw-bold">Sélectionnez les sites :</label><br>
+        <div class="filter-container">
+            <div>
+                <label for="sitesSelect" class="fw-bold">Sélectionnez les sites :</label><br>
+                <select id="sitesSelect" name="sites[]" multiple>
+                    @foreach ($sites as $site)
+                        <option value="{{ $site->code_site }}"
+                            {{ (is_array(request('sites')) && in_array($site->code_site, request('sites'))) ? 'selected' : '' }}>
+                            {{ $site->code_site }} - {{ $site->nom_site }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
 
-    <select id="sitesSelect" name="sites[]" multiple>
-        @foreach ($sites as $site)
-            <option value="{{ $site->code_site }}"
-                {{ (is_array(request('sites')) && in_array($site->code_site, request('sites'))) ? 'selected' : '' }}>
-                {{ $site->code_site }} - {{ $site->nom_site }}
-            </option>
-        @endforeach
-    </select>
-
-    <div style="display: flex; flex-direction: column;  margin-top: -100px; align-items: flex-start; margin-left:400px;">
+            <div style="display: flex; flex-direction: column;   align-items: flex-start; margin-left:80px;">
         <button type="button" id="selectAllBtn" class="btn btn-sm btn-outline-primary mt-2 mb-2">
             Tout sélectionner / Désélectionner
         </button>
         <button type="submit" class="btn btn-primary">Filtrer</button>
     </div>
-    </form> <br>
-        <hr class="border-4">
+        </div>
+    </form>
+    
+    <hr class="border-4">
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">   
     
@@ -168,11 +219,6 @@
          const selectAllBtn = document.getElementById('selectAllBtn');
     const checkboxes = document.querySelectorAll('.site-checkbox');
 
-    function updateButtonText() {
-        const allChecked = [...checkboxes].every(cb => cb.checked);
-        selectAllBtn.textContent = allChecked ? 'Tout désélectionner' : 'Tout sélectionner';
-    }
-
     selectAllBtn.addEventListener('click', () => {
         const allChecked = [...checkboxes].every(cb => cb.checked);
         checkboxes.forEach(cb => cb.checked = !allChecked);
@@ -183,23 +229,27 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(document).ready(function() {
-
-        // Pour le bouton "Tout sélectionner / Désélectionner"
-        $('#selectAllBtn').click(function() {
-            let allSelected = $('#sitesSelect option').length === $('#sitesSelect').val()?.length;
-            if (allSelected) {
-                // Désélectionner tout
-                $('#sitesSelect').val(null).trigger('change');
-            } else {
-                // Tout sélectionner
-                let allValues = [];
-                $('#sitesSelect option').each(function() {
-                    allValues.push($(this).val());
-                });
-                $('#sitesSelect').val(allValues).trigger('change');
+    $('#sitesSelect').select2({
+        placeholder: "Tapez pour rechercher",
+        width: '100%',
+        minimumInputLength: 0,
+        closeOnSelect: false, // ✅ Empêche la fermeture auto
+        language: {
+            noResults: function() {
+                return "Aucun site trouvé";
             }
-        });
+        }
     });
+
+    // Bouton "Tout sélectionner / Désélectionner"
+    $('#selectAllBtn').click(function() {
+        let allSelected = $('#sitesSelect option').length === $('#sitesSelect').val()?.length;
+        $('#sitesSelect').val(allSelected ? null : $('#sitesSelect option').map(function() {
+            return $(this).val();
+        }).get()).trigger('change');
+    });
+});
+
 </script>
 
 </body>

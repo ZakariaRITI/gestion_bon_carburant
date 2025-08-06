@@ -50,17 +50,6 @@
             z-index: 1000;
         }
 
-        #menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 23, 42, 0.9);
-            border-bottom: 1px solid rgba(14, 165, 233, 0.3);
-        }
-
         /* Titre principal */
         .main-title {
             color: #ffffff;
@@ -78,7 +67,8 @@
             justify-content: center;
             align-items: center;
             min-height: 60vh;
-            padding: 2rem;
+            padding: 1rem;
+            margin-left: 300px;
         }
 
         /* Card du formulaire */

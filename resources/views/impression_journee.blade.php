@@ -8,11 +8,23 @@
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}">
 </head>
 <body>
+
+<div id="d1">
+        @if(auth()->user()->type !== 'user')
+        <div id="menu1">
+        @include('menu2')
+        </div>
+        @else
+        <div id="menu1">
+        @include('menu3')
+        </div>
+        @endif
+    </div>
     <div id="menu">
         @include('menu')
     </div> <br> <br> <br> <br> <br>
 
-    <div class="container">
+    <div class="container" style="margin-left:210px;">
         <span class="fw-bold fs-3">Auto hall</span> <span id="jour" style="margin-left:800px;" class="fs-3"></span>
         <hr class="border border-dark my-4">    
         <div class="text-center">
