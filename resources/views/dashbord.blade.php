@@ -265,7 +265,7 @@
     // 2. Graphique en anneau (Doughnut) - Top 5 véhicules (Litres)
     const vehiculesData = @json($vehiculesTop);
     const vehiculesLabels = vehiculesData.map(item => 
-    item.vehicule ? `${item.vehicule.marque} ${item.vehicule.modele}` : `Véhicule ${item.vehicule_id}`);
+    item.vehicule ? `${item.vehicule.n_vehicule} - ${item.vehicule.marque} ${item.vehicule.modele}` : `Véhicule ${item.vehicule_id}`);
     const vehiculesValues = vehiculesData.map(item => parseFloat(item.total_litres));
 
     const ctxVehicules = document.getElementById('vehiculesChart').getContext('2d');

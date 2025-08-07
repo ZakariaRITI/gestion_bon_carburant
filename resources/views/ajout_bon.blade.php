@@ -362,11 +362,13 @@
         document.getElementById('form').addEventListener('submit', function(e) {
             const nb = document.getElementById('nb').value.trim();
             
-            if (nb.length !== 6) {
-                e.preventDefault();
-                alert("Le n° bon doit être composé de 6 chiffres.");
-                return;
-            }
+           const bonRegex = /^\d{6}$/;
+if (!bonRegex.test(nb)) {
+    e.preventDefault();
+    alert("Le n° bon doit être composé exactement de 6 chiffres numériques.");
+    return;
+}
+
 
             // Animation de soumission
             const form = document.querySelector('.form-card');

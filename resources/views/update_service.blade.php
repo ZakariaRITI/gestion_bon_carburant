@@ -170,7 +170,7 @@
 
                                 <div class="actions">
                                     <button type="submit" id="submitBtn" class="btn btn-warning w-100">Modifier</button>
-                                    <a href="/ds" class="btn-cancel">← Retour</a>
+                                    <a href="/gservice" class="btn-cancel">← Retour</a>
                                 </div>
                             </form>
                         </div> <!-- update-card -->
