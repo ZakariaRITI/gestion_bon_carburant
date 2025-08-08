@@ -198,11 +198,13 @@
                 }
 
                 // code exactement 2 caractères
-                if (code.length !== 2) {
-                    e.preventDefault();
-                    alert('Le code service doit avoir exactement 2 caractères.');
-                    return;
-                }
+                // code exactement 2 lettres alphabétiques
+if (!/^[A-Za-z]{2}$/.test(code)) {
+    e.preventDefault();
+    alert('Le code service doit contenir exactement 2 lettres alphabétiques.');
+    return;
+}
+
 
                 // optionnel : forcer uppercase
                 document.getElementById('cs').value = code.toUpperCase();
